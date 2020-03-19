@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory
+            android:iconSpaceReserved="false"
+            android:title="Spielernamen anpassen"
+            app:iconSpaceReserved="false">
+
+        <EditTextPreference
+                android:defaultValue="Spieler 1"
+                android:iconSpaceReserved="false"
+                android:key="key_player_1"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                android:title="Spieler 1"
+                app:defaultValue="Spieler 1"
+                app:iconSpaceReserved="false"
+                app:useSimpleSummaryProvider="true" />
+        <EditTextPreference
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:defaultValue="Spieler 2"
+                android:iconSpaceReserved="false"
+                android:key="key_player_2"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                android:title="Spieler 2"
+                app:defaultValue="Spieler 2"
+                app:iconSpaceReserved="false"
+                app:useSimpleSummaryProvider="true" />
+    </PreferenceCategory>
+    <PreferenceCategory
+            android:title="Spoiler "
+            app:iconSpaceReserved="false">
+
+        <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="key_show_spoiler"
+                android:summary="Zeige die gesamten Tore anstatt der Tore seit dem letzten Spiel"
+                android:title="Spoiler anzeigen"
+                app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="key_show_progress_debug"
+                android:summary="Zeige den Fortschritt auf dem Homescreen an (debug)"
+                android:title="Fortschritt anzeigen"
+                app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+    <PreferenceCategory
+            android:title="Optisch"
+            app:iconSpaceReserved="false">
+        <SwitchPreference
+                android:defaultValue="true"
+                android:key="key_confetti_enabled"
+                android:title="Konfetti rendern?"
+                app:iconSpaceReserved="false" />
+        <SeekBarPreference
+                android:key="key_konfetti_amount"
+                android:max="100"
+                app:defaultValue="true"
+                app:iconSpaceReserved="false"
+                app:showSeekBarValue="true"
+                app:title="Menge des gerenderten Konfettis" />
+        <ListPreference
+                android:defaultValue="1"
+                android:entries="@array/array_colors"
+                android:entryValues="@array/array_color_values"
+                android:iconSpaceReserved="false"
+                android:key="key_color_preference"
+                android:title="Farbschema"
+                app:iconSpaceReserved="false"
+                app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+</PreferenceScreen>
+

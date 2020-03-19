@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/mobile_navigation"
+            app:startDestination="@+id/nav_home">
+
+    <fragment
+            android:id="@+id/nav_home"
+            android:name="com.porangidev.fifagoalcounter.ui.home.HomeFragment"
+            android:label="@string/menu_home"
+            tools:layout="@layout/fragment_home"/>
+
+    <fragment
+            android:id="@+id/nav_stats"
+            android:name="com.porangidev.fifagoalcounter.ui.stats.StatsFragment"
+            android:label="@string/menu_stats"
+            tools:layout="@layout/fragment_stats"/>
+
+    <fragment
+            android:id="@+id/nav_data"
+            android:name="com.porangidev.fifagoalcounter.ui.data.DataFragment"
+            android:label="@string/menu_data"
+            tools:layout="@layout/fragment_data"
+    >
+        <action android:id="@+id/action_nav_data_to_adddata" app:destination="@id/nav_adddata"/>
+    </fragment>
+
+    <fragment
+            android:id="@+id/nav_settings"
+            android:name="com.porangidev.fifagoalcounter.ui.tools.ToolsFragment"
+            android:label="@string/menu_settings"
+            tools:layout="@layout/fragment_tools"/>
+
+    <fragment
+            android:id="@+id/nav_share"
+            android:name="com.porangidev.fifagoalcounter.ui.share.ShareFragment"
+            android:label="@string/menu_share"
+            tools:layout="@layout/fragment_share"/>
+
+    <fragment android:id="@+id/nav_adddata"
+              android:name="com.porangidev.fifagoalcounter.ui.data.AddDataFragment"
+              tools:layout="@layout/fragment_add_data" android:label="@string/menu_adddata">
+        <action android:id="@+id/action_nav_adddata_to_data" app:destination="@id/nav_data"/>
+    </fragment>
+</navigation>

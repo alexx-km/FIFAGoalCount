@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--<color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>-->
+    <color name="colorPrimary">#212121</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#484848</color>
+
+    //Color Picker
+    <color name="pickerBlack">#212121</color>
+    <color name="pickerRed">#D81B60</color>
+    <color name="pickerGreen">#008577</color>
+
+    //Chart Color
+    <color name="colorLine1">#484848</color>
+    <color name="colorLine2">#008577</color>
+
+    //OLD
+    <color name="colorGrey">#CFD8DC</color>
+    <color name="colorText">#808080</color>
+    <color name="amoledBlack">#000000</color>
+    <color name="background">#fafafa</color>
+</resources>

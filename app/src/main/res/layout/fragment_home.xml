@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/home_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <nl.dionsegijn.konfetti.KonfettiView
+            android:id="@+id/viewKonfetti"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/resetButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:src="@drawable/ic_baseline_clear_24px"
+            app:fabSize="mini"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0" />
+
+    <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintBottom_toTopOf="@+id/text_goals_scored"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+            android:id="@+id/text_goals_scored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="#00FFFFFF"
+            android:text="@string/goals"
+            android:textSize="55sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.512"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.05" />
+
+    <TextView
+            android:id="@+id/number_goals_hendrik"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/goals_zero"
+            android:textAlignment="center"
+            android:textSize="90sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/divider2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.75"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.3" />
+
+    <TextView
+            android:id="@+id/number_goals_alex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/goals_zero"
+            android:textAlignment="center"
+            android:textSize="90sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/divider2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.25"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.3" />
+
+    <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="@string/played_games"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.05"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/divider2"
+            app:layout_constraintVertical_bias="0.2" />
+
+    <TextView
+            android:id="@+id/number_games_played"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/goals_zero"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@id/textView7"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.05"
+            app:layout_constraintStart_toEndOf="@+id/textView7"
+            app:layout_constraintTop_toTopOf="@+id/textView7"
+            app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+            android:id="@+id/text_player_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/name_hendrik"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/divider2"
+            app:layout_constraintEnd_toEndOf="@+id/number_goals_hendrik"
+            app:layout_constraintStart_toStartOf="@+id/number_goals_hendrik"
+            app:layout_constraintTop_toBottomOf="@+id/number_goals_hendrik"
+            app:layout_constraintVertical_bias="0.05" />
+
+    <TextView
+            android:id="@+id/text_player_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/name_alex"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/divider2"
+            app:layout_constraintEnd_toEndOf="@+id/number_goals_alex"
+            app:layout_constraintStart_toStartOf="@+id/number_goals_alex"
+            app:layout_constraintTop_toBottomOf="@+id/number_goals_alex"
+            app:layout_constraintVertical_bias="0.05" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addGoalHendrik"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_add_24px"
+            app:backgroundTint="@color/colorPrimary"
+            app:layout_constraintBottom_toTopOf="@id/divider2"
+            app:layout_constraintEnd_toEndOf="@id/text_player_2"
+            app:layout_constraintStart_toStartOf="@id/text_player_2"
+            app:layout_constraintTop_toBottomOf="@id/text_player_2"
+            app:layout_constraintVertical_bias="0.15" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/delGoalHendrik"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_remove_24px"
+            app:backgroundTint="@color/colorPrimary"
+            app:layout_constraintBottom_toTopOf="@id/divider2"
+            app:layout_constraintEnd_toEndOf="@id/text_player_2"
+            app:layout_constraintStart_toStartOf="@id/text_player_2"
+            app:layout_constraintTop_toBottomOf="@id/addGoalHendrik"
+            app:layout_constraintVertical_bias="0.15" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addGoalAlex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_add_24px"
+            app:backgroundTint="@color/colorPrimary"
+            app:layout_constraintBottom_toTopOf="@id/divider2"
+            app:layout_constraintEnd_toEndOf="@id/text_player_1"
+            app:layout_constraintStart_toStartOf="@id/text_player_1"
+            app:layout_constraintTop_toBottomOf="@id/text_player_1"
+            app:layout_constraintVertical_bias="0.15" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/delGoalAlex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_remove_24px"
+            app:backgroundTint="@color/colorPrimary"
+            app:layout_constraintBottom_toTopOf="@id/divider2"
+            app:layout_constraintEnd_toEndOf="@id/text_player_1"
+            app:layout_constraintStart_toStartOf="@id/text_player_1"
+            app:layout_constraintTop_toBottomOf="@id/addGoalAlex"
+            app:layout_constraintVertical_bias="0.15" />
+    <!--<Chronometer
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/game_time"
+            app:layout_constraintEnd_toEndOf="@+id/number_games_played"
+            app:layout_constraintTop_toBottomOf="@+id/textView7"
+            app:layout_constraintVertical_bias="0.0" app:layout_constraintStart_toEndOf="@+id/textView4"
+            android:layout_marginStart="8dp" android:layout_marginEnd="8dp" android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"/>-->
+    <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/game_time_ellapsed"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/textView7"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textView7"
+            app:layout_constraintTop_toBottomOf="@+id/textView7"
+            app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+            android:id="@+id/text_last_goals"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@id/divider2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/viewKonfetti"
+            app:layout_constraintTop_toBottomOf="@id/divider" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addGame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_add_24px"
+            app:backgroundTint="@color/colorText"
+            app:fabCustomSize="30dp"
+            app:layout_constraintBottom_toBottomOf="@id/number_games_played"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.4"
+            app:layout_constraintStart_toEndOf="@id/number_games_played"
+            app:layout_constraintTop_toTopOf="@id/number_games_played" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/delGame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_remove_24px"
+            app:backgroundTint="@color/colorText"
+            app:fabCustomSize="30dp"
+            app:layout_constraintBottom_toBottomOf="@id/number_games_played"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/addGame"
+            app:layout_constraintTop_toTopOf="@id/number_games_played" />
+
+    <Chronometer
+            android:id="@+id/gameTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorText"
+            app:layout_constraintBottom_toBottomOf="@+id/textView4"
+            app:layout_constraintEnd_toEndOf="@+id/number_games_played"
+            app:layout_constraintStart_toStartOf="@+id/number_games_played"
+            app:layout_constraintTop_toTopOf="@+id/textView4" />
+
+    <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintBottom_toTopOf="@+id/number_games_played"
+            app:layout_constraintEnd_toEndOf="@+id/viewKonfetti"
+            app:layout_constraintStart_toStartOf="@+id/viewKonfetti"
+            app:layout_constraintTop_toBottomOf="@+id/delGoalHendrik"
+            app:layout_constraintVertical_bias="0.19999999" />
+
+    <View
+            android:id="@+id/divider2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="16dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/viewKonfetti"
+            app:layout_constraintTop_toTopOf="@+id/divider"
+            app:layout_constraintVertical_bias="0.25" />
+
+    <Button
+            android:id="@+id/saveButton"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Speichern und Zurücksetzen"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="IM LETZTEN SPIEL"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/divider"
+            app:layout_constraintEnd_toEndOf="@+id/text_goals_scored"
+            app:layout_constraintStart_toStartOf="@+id/text_goals_scored"
+            app:layout_constraintTop_toBottomOf="@+id/text_goals_scored"
+            app:layout_constraintVertical_bias="0.0" />
+</androidx.constraintlayout.widget.ConstraintLayout>

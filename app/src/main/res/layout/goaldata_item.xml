@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:animateLayoutChanges="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="8dp"
+            android:padding="8dp">
+
+        <TextView
+                android:id="@+id/text_view_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:text="1.1.1000"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                app:layout_constraintBottom_toBottomOf="@+id/text_view_gamesplayed"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/text_view_gamesplayed" />
+
+        <TextView
+                android:id="@+id/text_view_gamesplayed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                app:layout_constraintBottom_toBottomOf="@+id/text_view_goalsscored"
+                app:layout_constraintEnd_toStartOf="@+id/text_view_date"
+                app:layout_constraintStart_toEndOf="@+id/text_view_text_goalsscored"
+                app:layout_constraintTop_toTopOf="@+id/text_view_goalsscored" />
+
+        <TextView
+                android:id="@+id/text_view_text_gamesplayed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Spiele"
+                app:layout_constraintBottom_toBottomOf="@+id/text_view_gamesplayed"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.03"
+                app:layout_constraintStart_toEndOf="@+id/text_view_gamesplayed"
+                app:layout_constraintTop_toTopOf="@+id/text_view_gamesplayed" />
+
+        <TextView
+                android:id="@+id/text_view_text_player2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tore Hendrik"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/text_view_goals_hendrik"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.03"
+                app:layout_constraintStart_toEndOf="@+id/text_view_goals_hendrik"
+                app:layout_constraintTop_toTopOf="@+id/text_view_goals_hendrik" />
+
+        <TextView
+                android:id="@+id/text_view_goalsscored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.01"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+                android:id="@+id/text_view_text_goalsscored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tore"
+                app:layout_constraintBottom_toBottomOf="@+id/text_view_goalsscored"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.03"
+                app:layout_constraintStart_toEndOf="@+id/text_view_goalsscored"
+                app:layout_constraintTop_toTopOf="@+id/text_view_goalsscored" />
+
+        <TextView
+                android:id="@+id/text_view_text_player1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tore Alex"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/text_view_goals_alex"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.03"
+                app:layout_constraintStart_toEndOf="@+id/text_view_goalsscored"
+                app:layout_constraintTop_toTopOf="@+id/text_view_goals_alex" />
+
+        <TextView
+                android:id="@+id/text_view_goals_alex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="0"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.01"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_goalsscored" />
+
+        <TextView
+                android:id="@+id/text_view_goals_hendrik"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="0"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/text_view_gamesplayed"
+                app:layout_constraintStart_toStartOf="@+id/text_view_gamesplayed"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_gamesplayed" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>
