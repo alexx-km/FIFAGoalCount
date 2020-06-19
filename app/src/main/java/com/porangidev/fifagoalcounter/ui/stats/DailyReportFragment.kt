@@ -24,11 +24,17 @@ class DailyReportFragment : Fragment() {
 
     var prefs: SharedPreferences? = null
 
-    private var rowsecondsecond: TextView? = null
+
     private lateinit var textplayer1: TextView
     private lateinit var textplayer2: TextView
+    //textviews for goal quota
+    private var rowsecondsecond: TextView? = null
     private var rowthirdsecond: TextView? = null
     private var rowfourthsecond: TextView? = null
+    //textviews for goal data
+    private var rowsecondthird: TextView? = null
+    private var rowthirdthird: TextView? = null
+    private var rowfourththird: TextView? = null
     private lateinit var piechart: PieChart
 
     private var keyPlayer1 = "key_player_1"
@@ -48,9 +54,12 @@ class DailyReportFragment : Fragment() {
         //Views
         textplayer2 = root.findViewById(R.id.rowSecondFirst)
         rowsecondsecond = root.findViewById(R.id.rowSecondSecond)
+        rowsecondthird = root.findViewById(R.id.rowSecondThird)
         textplayer1 = root.findViewById(R.id.rowThirdFirst)
         rowthirdsecond = root.findViewById(R.id.rowThirdSecond)
+        rowthirdthird = root.findViewById(R.id.rowThirdThird)
         rowfourthsecond = root.findViewById(R.id.rowFourthSecond)
+        rowfourththird = root.findViewById(R.id.rowFourthThird)
         piechart = root.findViewById(R.id.pie_chart)
         piechart.visibility = View.INVISIBLE
         //write data to viewmodel
@@ -127,6 +136,9 @@ class DailyReportFragment : Fragment() {
             rowsecondsecond?.text = String.format("%.2f", gpgHendrik)
             rowthirdsecond?.text = String.format("%.2f", gpgAlex)
             rowfourthsecond?.text = String.format("%.2f", gpgTogether)
+            rowsecondthird?.text = statsViewModel.goalsHendrik.toString()
+            rowthirdthird?.text = statsViewModel.goalsAlex.toString()
+            rowfourththird?.text = (statsViewModel.goalsAlex + statsViewModel.goalsHendrik).toString()
         }
     }
 }

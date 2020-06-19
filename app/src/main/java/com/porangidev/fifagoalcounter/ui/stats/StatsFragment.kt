@@ -38,6 +38,7 @@ class StatsFragment : Fragment() {
         val viewpager = view.findViewById<ViewPager>(R.id.viewpager_main)
         val adapter = StatsTabsAdapter(childFragmentManager)
         tabLayout.setupWithViewPager(viewpager)
+        tabLayout.tabMode = TabLayout.MODE_SCROLLABLE
         viewpager.adapter = adapter
         viewpager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
         viewpager.offscreenPageLimit = 2

@@ -5,10 +5,10 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 
 class StatsTabsAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
-    var tabTitles = arrayOf("Tagesbericht", "Torverlauf", "Torquoten")
+    var tabTitles = arrayOf("Tagesbericht", "Torverlauf", "Torquoten", "Gesamt")
 
     override fun getCount(): Int {
-        return 3
+        return 4
     }
 
     override fun getItem(position: Int): Fragment {
@@ -17,8 +17,9 @@ class StatsTabsAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
                 DailyReportFragment()
             }
             1 -> GoalsFragment()
+            2 -> GoalQuotaFragment()
             else -> {
-                return GoalQuotaFragment()
+                return GoalTotalFragment()
             }
         }
     }

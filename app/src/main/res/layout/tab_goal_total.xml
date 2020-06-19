@@ -6,16 +6,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-    <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/quota_chart"
-            android:layout_width="match_parent"
+
+    <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/totalGoalChart"
+            android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-    </com.github.mikephil.charting.charts.LineChart>
-
+            app:layout_constraintTop_toTopOf="parent"></com.github.mikephil.charting.charts.PieChart>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

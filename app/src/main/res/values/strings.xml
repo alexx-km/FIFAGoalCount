@@ -20,7 +20,8 @@
     <string name="name_hendrik">Hendrik</string>
     <string name="name_alex">Alex</string>
     <string name="player">Spieler</string>
-    <string name="goalpergame">Tore pro Spiel</string>
+    <string name="goalpergame">Tore \npro Spiel</string>
+    <string name="goalstotal">Tore \n insgesamt</string>
     <string name="goals_hendrik">Tor Hendrik</string>
     <string name="goals_alex">Tor Alex</string>
     <string name="goals">TORE</string>

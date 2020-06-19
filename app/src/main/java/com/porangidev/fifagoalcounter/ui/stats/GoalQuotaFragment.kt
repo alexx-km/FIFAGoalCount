@@ -37,17 +37,16 @@ class GoalQuotaFragment : Fragment() {
     private var goaldatasize = 0
     private var tempgoalsalex = 0
     private var tempgoalshendrik = 0
+    private var lastplaydate = 0F
 
     private var _visiblefirsttime = false
 
     private lateinit var quotaChart: LineChart
-    private lateinit var totalGoalsChart: PieChart
 
     private lateinit var repository: GoalRepository
     private lateinit var goalDataAdapter: GoalDataAdapter
 
     private lateinit var goalQuotaViewModel: GoalQuotaViewModel
-    private lateinit var text: TextView
     private lateinit var listquotaalex: ArrayList<Entry>
     private lateinit var listquotahendrik: ArrayList<Entry>
     private lateinit var listtotalgoals: ArrayList<PieEntry>
@@ -70,10 +69,6 @@ class GoalQuotaFragment : Fragment() {
         val root = inflater.inflate(R.layout.tab_goal_quota, container, false)
 
         quotaChart = root.findViewById(R.id.quota_chart)
-        totalGoalsChart = root.findViewById(R.id.totalGoalChart)
-        totalGoalsChart.visibility = View.INVISIBLE
-        text = root.findViewById(R.id.textView6)
-        text.visibility = View.GONE
         //GoalData
         listquotahendrik = ArrayList<Entry>()
         listquotaalex = ArrayList<Entry>()
@@ -88,7 +83,6 @@ class GoalQuotaFragment : Fragment() {
         if (isVisibleToUser && !_visiblefirsttime) {
             _visiblefirsttime = true
             displayQuotaChart()
-            displayTotalGoalsChart()
         }
     }
 
@@ -107,6 +101,9 @@ class GoalQuotaFragment : Fragment() {
 
         var currentGoalData: GoalData
         //text.text = goaldatasize.toString()
+
+        var newestGoalData = goalDataAdapter.getGoalDataAt(goaldatasize - 1)
+        lastplaydate = newestGoalData.playDate.toFloat()
 
         while (goaldatasize > 0) {
             //get current goal data
@@ -127,38 +124,6 @@ class GoalQuotaFragment : Fragment() {
         }
         listtotalgoals.add(PieEntry(tempgoalsalex.toFloat(), "Tore ${goalQuotaViewModel.player1}"))
         listtotalgoals.add(PieEntry(tempgoalshendrik.toFloat(), "Tore ${goalQuotaViewModel.player2}"))
-        text.text = tempgoalsalex.toString()
-    }
-
-    private fun displayTotalGoalsChart() {
-        var dataSetTotalGoals = PieDataSet(listtotalgoals, "")
-        //dataSetTotalGoals.valueFormatter = IValueFormatter(//)
-        var colors = ArrayList<Int>()
-        if (tempgoalsalex < tempgoalshendrik) {
-            colors.add(ContextCompat.getColor(context!!, R.color.colorPrimary))
-            colors.add(ContextCompat.getColor(context!!, R.color.colorLine2))
-        } else {
-            colors.add(ContextCompat.getColor(context!!, R.color.colorLine2))
-            colors.add(ContextCompat.getColor(context!!, R.color.colorPrimary))
-        }
-        dataSetTotalGoals.colors = colors
-        dataSetTotalGoals.valueTextSize = 15F
-        dataSetTotalGoals.valueTextColor = Color.LTGRAY
-        //dataSetTotalGoals.valueTextColor
-        var data = PieData(dataSetTotalGoals)
-        var totalgoals = tempgoalsalex + tempgoalshendrik
-
-        totalGoalsChart.data = data
-        totalGoalsChart.setDrawEntryLabels(false)
-        totalGoalsChart.centerText = "Insgesamt $totalgoals Tore"
-        totalGoalsChart.setCenterTextColor(ContextCompat.getColor(context!!, R.color.amoledBlack))
-        totalGoalsChart.description.isEnabled = false
-        totalGoalsChart.legend.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
-        totalGoalsChart.visibility = View.VISIBLE
-        totalGoalsChart.setEntryLabelColor(Color.LTGRAY)
-        totalGoalsChart.isRotationEnabled = false
-        totalGoalsChart.isHighlightPerTapEnabled = false
-        totalGoalsChart.animateXY(1000, 1000, Easing.Linear)
     }
 
     private fun displayQuotaChart() {
@@ -171,7 +136,7 @@ class GoalQuotaFragment : Fragment() {
 
         var xAxis = quotaChart.xAxis
         xAxis.position = XAxis.XAxisPosition.BOTTOM
-        xAxis.granularity = 1F
+        //xAxis.granularity = 1F
         xAxis.setDrawLabels(true)
         xAxis.valueFormatter = DateAxisFormatter()
         xAxis.setDrawGridLines(true)
@@ -189,11 +154,14 @@ class GoalQuotaFragment : Fragment() {
         var data = LineData(dataSetQuota)
         quotaChart.data = data
         quotaChart.description.isEnabled = false
-        quotaChart.setPinchZoom(false)
         quotaChart.legend.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
         quotaChart.legend.verticalAlignment = Legend.LegendVerticalAlignment.TOP
         quotaChart.isAutoScaleMinMaxEnabled = true
         quotaChart.animateX(1500, Easing.EaseInOutExpo)
+
+        /*quotaChart.notifyDataSetChanged()
+        quotaChart.moveViewToX(lastplaydate)
+        quotaChart.setVisibleXRangeMaximum(5000000000F)*/
 
     }
 
