@@ -1,5 +1,6 @@
 package com.porangidev.fifagoalcounter.ui.stats
 
+import android.app.Activity
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
@@ -43,11 +44,7 @@ class GoalTotalFragment : Fragment() {
 
     private lateinit var totalGoalsChart: PieChart
 
-    private lateinit var repository: GoalRepository
-    private lateinit var goalDataAdapter: GoalDataAdapter
-
-    private lateinit var goalQuotaViewModel: GoalQuotaViewModel
-    private lateinit var listtotalgoals: ArrayList<PieEntry>
+    private lateinit var goalQuotaViewModel: StatsViewModel
 
     private var keyPlayer1 = "key_player_1"
     private var keyPlayer2 = "key_player_2"
@@ -58,18 +55,18 @@ class GoalTotalFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         //prepare view
-        goalQuotaViewModel = ViewModelProviders.of(this).get(GoalQuotaViewModel::class.java)
+        goalQuotaViewModel = ViewModelProviders.of(this).get(StatsViewModel::class.java)
         prefs = PreferenceManager.getDefaultSharedPreferences(context)
         goalQuotaViewModel.player1 = prefs!!.getString(keyPlayer1, "")
         goalQuotaViewModel.player2 = prefs!!.getString(keyPlayer2, "")
-        repository = GoalRepository(GoalDatabase.INSTANCE!!.goalDao())
-        goalDataAdapter = GoalDataAdapter()
         val root = inflater.inflate(R.layout.tab_goal_total, container, false)
         totalGoalsChart = root.findViewById(R.id.totalGoalChart)
         totalGoalsChart.visibility = View.INVISIBLE
         //GoalData
-        listtotalgoals = ArrayList<PieEntry>()
-        prepareList()
+        goalQuotaViewModel.listtotalgoals = ArrayList<PieEntry>()
+        goalQuotaViewModel.listtotalgoals = (activity as MainActivity?)!!.getPieData()
+        //prepareList()
+        displayTotalGoalsChart()
         return root
     }
 
@@ -77,46 +74,23 @@ class GoalTotalFragment : Fragment() {
         //super.setUserVisibleHint(isVisibleToUser)
         if (isVisibleToUser && !_visiblefirsttime) {
             _visiblefirsttime = true
-            displayTotalGoalsChart()
-        }
-    }
-
-    private fun prepareList() {
-
-        var goaldatalist = goalQuotaViewModel.getAllSessionsNonLive()
-        goaldatasize = goaldatalist.size
-
-        goalDataAdapter.setGoalData(goaldatalist)
-
-        //text.text = goaldatasize.toString()
-
-        var currentGoalData: GoalData
-        //text.text = goaldatasize.toString()
-
-        var newestGoalData = goalDataAdapter.getGoalDataAt(goaldatasize - 1)
-        lastplaydate = newestGoalData.playDate.toFloat()
-
-        while (goaldatasize > 0) {
-            //get current goal data
-            currentGoalData = goalDataAdapter.getGoalDataAt(goaldatasize - 1)
-            tempgoalsalex += currentGoalData.goalsAlex
-            tempgoalshendrik += currentGoalData.goalsHendrik
-            goaldatasize -= 1
+            //displayTotalGoalsChart()
         }
     }
 
     private fun displayTotalGoalsChart() {
-        var dataSetTotalGoals = PieDataSet(listtotalgoals, "")
+        var dataSetTotalGoals = PieDataSet(goalQuotaViewModel.listtotalgoals, "")
         //dataSetTotalGoals.valueFormatter = IValueFormatter(//)
         var colors = ArrayList<Int>()
         colors.add(ContextCompat.getColor(context!!, R.color.colorLine2))
         colors.add(ContextCompat.getColor(context!!, R.color.colorPrimary))
         dataSetTotalGoals.colors = colors
+        dataSetTotalGoals.valueFormatter
         dataSetTotalGoals.valueTextSize = 15F
         dataSetTotalGoals.valueTextColor = Color.LTGRAY
         //dataSetTotalGoals.valueTextColor
         var data = PieData(dataSetTotalGoals)
-        var totalgoals = tempgoalsalex + tempgoalshendrik
+        var totalgoals = goalQuotaViewModel.listtotalgoals[0].y + goalQuotaViewModel.listtotalgoals[1].y
 
         totalGoalsChart.data = data
         totalGoalsChart.setDrawEntryLabels(false)

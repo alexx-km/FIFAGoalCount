@@ -1,15 +1,18 @@
 package com.porangidev.fifagoalcounter.ui.stats
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.github.mikephil.charting.data.PieEntry
+import com.porangidev.fifagoalcounter.GoalData
+import com.porangidev.fifagoalcounter.GoalDatabase
+import com.porangidev.fifagoalcounter.GoalRepository
 
-class StatsViewModel : ViewModel() {
+class StatsViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is stats Fragment"
-    }
-    val text: LiveData<String> = _text
+    lateinit var listtotalgoals: ArrayList<PieEntry>
     var goalsAlex = 0
     var goalsHendrik = 0
     var gamesPlayed = 0

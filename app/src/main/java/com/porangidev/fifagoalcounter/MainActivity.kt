@@ -21,11 +21,15 @@ import androidx.annotation.RequiresApi
 import androidx.preference.Preference
 import androidx.preference.PreferenceManager
 import androidx.viewpager.widget.ViewPager
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.PieEntry
 import com.google.android.material.tabs.TabLayout
 import com.porangidev.fifagoalcounter.ui.home.HomeFragment
+import com.porangidev.fifagoalcounter.ui.stats.GoalQuotaViewModel
 import com.porangidev.fifagoalcounter.ui.stats.StatsTabsAdapter
 import com.porangidev.fifagoalcounter.ui.tools.ToolsFragment
 import kotlinx.android.synthetic.main.fragment_stats.*
+import java.lang.reflect.Array
 
 class MainActivity : AppCompatActivity(), HomeFragment.OnFragmentHomeInteractionListener {
     //Shared Preferences
@@ -40,6 +44,8 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnFragmentHomeInteraction
     var elapsedGameTime = 0L
     var goalProgress = ""
     //Data keys
+    var keyPlayer1 = "key_player_1"
+    var keyPlayer2 = "key_player_2"
     var keyGoalsHendrik = "KEY_GOALS_HENDRIK_PREFS"
     var keyGoalsHendrikTemp = "KEY_GOALS_HENDRIK_TEMP_PREFS"
     var keyGoalsAlex = "KEY_GOALS_ALEX_PREFS"
@@ -49,6 +55,12 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnFragmentHomeInteraction
     var keyGoalProgress = "KEY_GOAL_PROGRESS_PREFS"
 
     private lateinit var appBarConfiguration: AppBarConfiguration
+
+    private lateinit var repository: GoalRepository
+    private lateinit var goalDataAdapter: GoalDataAdapter
+    private lateinit var listtotalgoals: ArrayList<PieEntry>
+    private lateinit var listquotaplayer1: ArrayList<Entry>
+    private lateinit var listquotaplayer2: ArrayList<Entry>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,6 +83,8 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnFragmentHomeInteraction
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+        setUpDatabase()
+        preparePieData()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -109,5 +123,61 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnFragmentHomeInteraction
         editor.putLong(keyElapsedGameTime, elapsedGameTime)
         editor.putString(keyGoalProgress, goalProgress)
         editor.apply()
+    }
+
+    fun setUpDatabase(){
+        listtotalgoals = ArrayList()
+        val goalDao = GoalDatabase.getInstance(application).goalDao()
+        repository = GoalRepository(goalDao)
+        goalDataAdapter = GoalDataAdapter()
+
+        listquotaplayer1 = ArrayList<Entry>()
+        listquotaplayer2 = ArrayList<Entry>()
+    }
+
+    fun preparePieData(){
+        var goaldatalist = repository.getAllSessionsNonLive()
+        var goaldatasize = goaldatalist.size
+
+        goalDataAdapter.setGoalData(goaldatalist)
+
+        var currentGoalData: GoalData
+        var newestGoalData = goalDataAdapter.getGoalDataAt(goaldatasize - 1)
+        var lastplaydate = newestGoalData.playDate.toFloat()
+
+        var tempgoalsalex = 0
+        var tempgoalshendrik = 0
+        var tempquotaalex = 0F
+        var tempquotahendrik = 0F
+
+        while (goaldatasize > 0) {
+            //get current goal data
+            currentGoalData = goalDataAdapter.getGoalDataAt(goaldatasize - 1)
+            tempgoalsalex += currentGoalData.goalsAlex
+            tempgoalshendrik += currentGoalData.goalsHendrik
+            tempquotaalex = currentGoalData.getAlexQuota().toFloat()
+            tempquotahendrik = currentGoalData.getHendrikQuota().toFloat()
+            listquotaplayer1.add(Entry(currentGoalData.playDate.toFloat(), tempquotaalex))
+            listquotaplayer2.add(Entry(currentGoalData.playDate.toFloat(), tempquotahendrik))
+            goaldatasize -= 1
+        }
+        var player1 = prefs!!.getString(keyPlayer1, "")
+        var player2 = prefs!!.getString(keyPlayer2, "")
+        listtotalgoals.add(PieEntry(tempgoalsalex.toFloat(), "Tore ${player1}"))
+        listtotalgoals.add(PieEntry(tempgoalshendrik.toFloat(), "Tore ${player2}"))
+
+        //goals current matchday missing
+    }
+
+    fun getPieData(): ArrayList<PieEntry> {
+        return listtotalgoals
+    }
+
+    fun getQuotaDataPlayer1(): ArrayList<Entry>{
+        return listquotaplayer1
+    }
+
+    fun getQuotaDataPlayer2(): ArrayList<Entry>{
+        return listquotaplayer2
     }
 }

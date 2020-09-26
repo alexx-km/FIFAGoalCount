@@ -9,9 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.preference.PreferenceManager
 import androidx.viewpager.widget.ViewPager
+import com.github.mikephil.charting.data.PieEntry
 import com.google.android.material.tabs.TabLayout
-import com.porangidev.fifagoalcounter.R
-
+import com.porangidev.fifagoalcounter.*
 
 
 class StatsFragment : Fragment() {
@@ -29,6 +29,7 @@ class StatsFragment : Fragment() {
         prefs = PreferenceManager.getDefaultSharedPreferences(context)
         statsViewModel.player1 = prefs!!.getString(keyPlayer1, "")
         statsViewModel.player2 = prefs!!.getString(keyPlayer2, "")
+        //init lists
         val root = inflater.inflate(R.layout.fragment_stats, container, false)
         return root
     }

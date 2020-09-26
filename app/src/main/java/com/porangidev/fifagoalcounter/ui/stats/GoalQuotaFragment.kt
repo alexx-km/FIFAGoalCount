@@ -3,32 +3,24 @@ package com.porangidev.fifagoalcounter.ui.stats
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
-import android.os.SystemClock
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.preference.PreferenceManager
 import com.github.mikephil.charting.animation.Easing
-import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.charts.LineChart
-import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.data.*
-import com.github.mikephil.charting.formatter.IValueFormatter
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.porangidev.fifagoalcounter.*
-import java.math.BigDecimal
-import java.math.RoundingMode
-import java.sql.Date
-import java.text.DateFormat
 import java.text.DecimalFormat
-import java.util.*
-import kotlin.collections.ArrayList
 
 class GoalQuotaFragment : Fragment() {
 
@@ -117,13 +109,9 @@ class GoalQuotaFragment : Fragment() {
                     .toFloat()*/
             listquotaalex.add(Entry(currentGoalData.playDate.toFloat(), tempquotaalex))
             listquotahendrik.add(Entry(currentGoalData.playDate.toFloat(), tempquotahendrik))
-            //
-            tempgoalsalex += currentGoalData.goalsAlex
-            tempgoalshendrik += currentGoalData.goalsHendrik
             goaldatasize -= 1
         }
-        listtotalgoals.add(PieEntry(tempgoalsalex.toFloat(), "Tore ${goalQuotaViewModel.player1}"))
-        listtotalgoals.add(PieEntry(tempgoalshendrik.toFloat(), "Tore ${goalQuotaViewModel.player2}"))
+
     }
 
     private fun displayQuotaChart() {
