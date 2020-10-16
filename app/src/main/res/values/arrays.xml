@@ -2,4 +2,14 @@
 <resources>
     <string-array name="array_colors">blue, red, blue</string-array>
     <string-array name="array_color_values">R.colors.pickerBlack, R.colors.pickerBlack, R.colors.pickerBlack</string-array>
+    <string-array name="FIFA_version">
+        <item>FIFA 20</item>
+        <item>FIFA 21</item>
+        <item>FIFA 22</item>
+    </string-array>
+    <string-array name="FIFA_version_data">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
 </resources>

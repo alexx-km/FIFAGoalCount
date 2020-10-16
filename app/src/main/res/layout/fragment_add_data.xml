@@ -18,6 +18,7 @@
                 android:gravity="center_horizontal|center_vertical"
                 android:hint="08/08/1888"
                 android:inputType="date"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -73,26 +74,76 @@
                 app:layout_constraintEnd_toEndOf="@+id/mgames_played"
                 app:layout_constraintStart_toStartOf="@+id/mgames_played" app:layout_constraintVertical_bias="0.8"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
         <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="Torreihenfolge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/mgoals_alex"
-                app:layout_constraintBottom_toTopOf="@+id/mgoal_progress" app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" android:id="@+id/textView3"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                app:layout_constraintVertical_bias="0.89"/>
+                app:layout_constraintBottom_toTopOf="@+id/mgoal_progress"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mgoals_alex"
+                app:layout_constraintVertical_bias="0.49" />
+
         <EditText
+                android:id="@+id/mgoal_progress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="textMultiLine"
-                android:ems="10"
-                android:id="@+id/mgoal_progress"
-                app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginBottom="60dp"
+                android:ems="10"
+                android:inputType="textMultiLine"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/textView3"
+                app:layout_constraintStart_toStartOf="@+id/textView3"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.89" app:layout_constraintEnd_toEndOf="@+id/textView3"
-                app:layout_constraintStart_toStartOf="@+id/textView3"/>
+                app:layout_constraintVertical_bias="0.82" />
+
+        <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fifa_version"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mgoal_progress"
+                app:layout_constraintVertical_bias="0.32999998" />
+
+        <RadioGroup
+                android:id="@+id/button_group_version"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView10"
+                app:layout_constraintVertical_bias="0.0">
+
+            <RadioButton
+                    android:id="@+id/button_version_20"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fifa_version_20" />
+
+            <RadioButton
+                    android:id="@+id/button_version_21"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fifa_version_21" />
+
+            <RadioButton
+                    android:id="@+id/button_version_22"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:text="@string/fifa_version_22" />
+        </RadioGroup>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

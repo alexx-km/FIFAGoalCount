@@ -95,14 +95,14 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
     private fun init() {
         //TextViews
-        numberGoalsAlex = view!!.findViewById(R.id.number_goals_alex)
-        numberGoalsHendrik = view!!.findViewById(R.id.number_goals_hendrik)
-        numberGamesPlayed = view!!.findViewById(R.id.number_games_played)
-        textGoalProgress = view!!.findViewById(R.id.text_last_goals)
-        textPlayer1 = view!!.findViewById(R.id.text_player_1)
-        textPlayer2 = view!!.findViewById(R.id.text_player_2)
-        divider = view!!.findViewById(R.id.divider)
-        divider2 = view!!.findViewById(R.id.divider2)
+        numberGoalsAlex = requireView().findViewById(R.id.number_goals_alex)
+        numberGoalsHendrik = requireView().findViewById(R.id.number_goals_hendrik)
+        numberGamesPlayed = requireView().findViewById(R.id.number_games_played)
+        textGoalProgress = requireView().findViewById(R.id.text_last_goals)
+        textPlayer1 = requireView().findViewById(R.id.text_player_1)
+        textPlayer2 = requireView().findViewById(R.id.text_player_2)
+        divider = requireView().findViewById(R.id.divider)
+        divider2 = requireView().findViewById(R.id.divider2)
         var showprogress = prefs!!.getBoolean("key_show_progress_debug", true)
         if (showprogress) {
             textGoalProgress.visibility = View.VISIBLE
@@ -113,16 +113,16 @@ class HomeFragment : Fragment(), View.OnClickListener {
             divider.visibility = View.INVISIBLE
             divider2.visibility = View.INVISIBLE
         }
-        date = view!!.findViewById(R.id.date)
+        date = requireView().findViewById(R.id.date)
         //Buttons
-        addGoalAlex = view!!.findViewById(R.id.addGoalAlex)
-        delGoalAlex = view!!.findViewById(R.id.delGoalAlex)
-        addGoalHendrik = view!!.findViewById(R.id.addGoalHendrik)
-        delGoalHendrik = view!!.findViewById(R.id.delGoalHendrik)
-        addGame = view!!.findViewById(R.id.addGame)
-        delGame = view!!.findViewById(R.id.delGame)
-        resetButton = view!!.findViewById(R.id.resetButton)
-        saveButton = view!!.findViewById(R.id.saveButton)
+        addGoalAlex = requireView().findViewById(R.id.addGoalAlex)
+        delGoalAlex = requireView().findViewById(R.id.delGoalAlex)
+        addGoalHendrik = requireView().findViewById(R.id.addGoalHendrik)
+        delGoalHendrik = requireView().findViewById(R.id.delGoalHendrik)
+        addGame = requireView().findViewById(R.id.addGame)
+        delGame = requireView().findViewById(R.id.delGame)
+        resetButton = requireView().findViewById(R.id.resetButton)
+        saveButton = requireView().findViewById(R.id.saveButton)
         //Button OnClickListener
         addGoalAlex.setOnClickListener(this)
         delGoalAlex.setOnClickListener(this)
@@ -154,7 +154,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
         numberGamesPlayed.text = homeViewModel.gamesPlayed.toString()
         textGoalProgress.text = homeViewModel.goalProgress
         //Chronometer
-        gameTime = view!!.findViewById(R.id.gameTime)
+        gameTime = requireView().findViewById(R.id.gameTime)
         if (homeViewModel.ellapsedGameTime != 0L) {
             gameTime.base = homeViewModel.ellapsedGameTime
             gameTime.start()
@@ -206,8 +206,15 @@ class HomeFragment : Fragment(), View.OnClickListener {
     }
 
     private fun saveMe() {
-        Snackbar.make(view!!, "Gespeichert und Zurückgesetzt", Snackbar.LENGTH_SHORT).show()
+        Snackbar.make(requireView(), "Gespeichert und Zurückgesetzt", Snackbar.LENGTH_SHORT).show()
         //val mdate = System.currentTimeMillis()
+        val tversion = prefs!!.getString("version_preference", "FIFA 21")
+        var version = "FIFA 20"
+        when(tversion){
+            "0" -> version = "FIFA 20"
+            "1" -> version = "FIFA 21"
+            "2" -> version = "FIFA 22"
+        }
         val dataViewModel = ViewModelProviders.of(this).get(DataViewModel::class.java)
         val goalData = GoalData(
             null,
@@ -215,7 +222,8 @@ class HomeFragment : Fragment(), View.OnClickListener {
             homeViewModel.goalsHendrik,
             homeViewModel.gamesPlayed,
             homeViewModel.goalProgress,
-            gameDate
+            gameDate,
+            version
         )
         dataViewModel.insert(goalData)
         resetMe()

@@ -4,13 +4,18 @@ import android.icu.text.SimpleDateFormat
 import android.os.Bundle
 import android.text.format.DateFormat
 import android.view.*
-import android.widget.*
+import android.widget.EditText
+import android.widget.NumberPicker
+import android.widget.RadioButton
+import android.widget.RadioGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import com.porangidev.fifagoalcounter.GoalData
 import com.porangidev.fifagoalcounter.R
 import java.util.*
+
 
 class AddDataFragment : Fragment() {
 
@@ -20,6 +25,7 @@ class AddDataFragment : Fragment() {
     private val keyGoalsProgress = "com.porangidev.fifagoalcounter.ui.data.EXTRA_GOALS_PROGRESS"
     private val keyDate = "com.porangidev.fifagoalcounter.ui.data.EXTRA_DATE"
     private val keyId = "com.porangidev.fifagoalcounter.ui.data.EXTRA_ID"
+    private val keyVersion = "com.porangidev.fifagoalcounter.ui.data.EXTRA_VERSION"
 
     private lateinit var dataViewModel: DataViewModel
 
@@ -28,7 +34,13 @@ class AddDataFragment : Fragment() {
     private lateinit var nmbgoalsAlex: NumberPicker
     private lateinit var nmbgamesPlayed: NumberPicker
     private lateinit var goalprogress: EditText
+    private lateinit var btn_group_version: RadioGroup
+    private lateinit var btn_version_20: RadioButton
+    private lateinit var btn_version_21: RadioButton
+    private lateinit var btn_version_22: RadioButton
 
+    private var fifaVersion: String = ""
+    private var fifaVersionToSave: String = ""
     private var goalProgress: String = ""
     private var date: String = ""
     private var gamesPlayed: Int = 0
@@ -49,6 +61,10 @@ class AddDataFragment : Fragment() {
         nmbgoalsAlex = root.findViewById(R.id.mgoals_alex)
         nmbgamesPlayed = root.findViewById(R.id.mgames_played)
         goalprogress = root.findViewById(R.id.mgoal_progress)
+        btn_group_version = root.findViewById(R.id.button_group_version)
+        btn_version_20 = root.findViewById(R.id.button_version_20)
+        btn_version_21 = root.findViewById(R.id.button_version_21)
+        btn_version_22 = root.findViewById(R.id.button_version_22)
         val datepickerfragment = DatePickerFragment(datepicker)
         val tempcalendar = Calendar.getInstance()
 
@@ -63,22 +79,47 @@ class AddDataFragment : Fragment() {
 
         if (arguments != null) {
             isUpdate = true
-            mid = arguments!!.getInt(keyId)
+            mid = requireArguments().getInt(keyId)
             datepicker.setText(
                 DateFormat.format(
                     "dd.MM.yyyy",
-                    arguments!!.getLong(keyDate)
+                    requireArguments().getLong(keyDate)
                 ).toString()
             )
-            nmbgoalsAlex.value = arguments!!.getInt(keyGoalsAlex)
-            nmbgoalsHendrik.value = arguments!!.getInt(keyGoalsHendrik)
-            nmbgamesPlayed.value = arguments!!.getInt(keyGamesPlayed)
-            goalprogress.setText(arguments!!.getString(keyGoalsProgress))
+            fifaVersion = requireArguments().getString(keyVersion)
+            nmbgoalsAlex.value = requireArguments().getInt(keyGoalsAlex)
+            nmbgoalsHendrik.value = requireArguments().getInt(keyGoalsHendrik)
+            nmbgamesPlayed.value = requireArguments().getInt(keyGamesPlayed)
+            goalprogress.setText(requireArguments().getString(keyGoalsProgress))
         } else {
             datepicker.setText(DateFormat.format("dd.MM.yyyy", tempcalendar).toString())
         }
 
-        datepicker.setOnClickListener { datepickerfragment.show(fragmentManager!!, "datepicker") }
+        datepicker.setOnClickListener { datepickerfragment.show(
+            requireFragmentManager(),
+            "datepicker"
+        ) }
+
+        when(fifaVersion){
+            "FIFA 20" -> btn_group_version.check(btn_version_20.id);
+            "FIFA 21" -> btn_group_version.check(btn_version_21.id)
+        }
+
+        fifaVersionToSave = fifaVersion
+
+        btn_group_version.setOnCheckedChangeListener { _, checkedId ->
+            when (checkedId) {
+                R.id.button_version_20 -> {
+                    fifaVersionToSave = "FIFA 20"
+                }
+                R.id.button_version_21-> {
+                    fifaVersionToSave = "FIFA 21"
+                }
+                R.id.button_version_22 -> {
+                    fifaVersionToSave = "FIFA 22"
+                }
+            }
+        }
 
         setHasOptionsMenu(true)
 
@@ -98,7 +139,15 @@ class AddDataFragment : Fragment() {
 
         val goalProgressNew = checkString(goalProgress, gamesPlayed, goalsAlex, goalsHendrik)
 
-        val goalData = GoalData(null, goalsAlex, goalsHendrik, gamesPlayed, goalProgressNew, mdate)
+        val goalData = GoalData(
+            null,
+            goalsAlex,
+            goalsHendrik,
+            gamesPlayed,
+            goalProgressNew,
+            mdate,
+            fifaVersionToSave
+        )
         dataViewModel.insert(goalData)
 
 
@@ -118,7 +167,15 @@ class AddDataFragment : Fragment() {
 
         val goalProgressNew = checkString(goalProgress, gamesPlayed, goalsAlex, goalsHendrik)
 
-        val goalData = GoalData(null, goalsAlex, goalsHendrik, gamesPlayed, goalProgressNew, mdate)
+        val goalData = GoalData(
+            null,
+            goalsAlex,
+            goalsHendrik,
+            gamesPlayed,
+            goalProgressNew,
+            mdate,
+            fifaVersionToSave
+        )
         goalData.id = mid
         dataViewModel.update(goalData)
 

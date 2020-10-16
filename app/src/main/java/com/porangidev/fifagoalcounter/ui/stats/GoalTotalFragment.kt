@@ -3,6 +3,7 @@ package com.porangidev.fifagoalcounter.ui.stats
 import android.app.Activity
 import android.content.SharedPreferences
 import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Bundle
 import android.os.SystemClock
 import android.view.LayoutInflater
@@ -30,6 +31,7 @@ import java.text.DateFormat
 import java.text.DecimalFormat
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.math.round
 
 class GoalTotalFragment : Fragment() {
 
@@ -45,6 +47,14 @@ class GoalTotalFragment : Fragment() {
     private lateinit var totalGoalsChart: PieChart
 
     private lateinit var goalQuotaViewModel: StatsViewModel
+
+    //further stats
+    private lateinit var row00: TextView
+    private lateinit var row01: TextView
+    private lateinit var row02: TextView
+    private lateinit var row10: TextView
+    private lateinit var row11: TextView
+    private lateinit var row12: TextView
 
     private var keyPlayer1 = "key_player_1"
     private var keyPlayer2 = "key_player_2"
@@ -62,11 +72,20 @@ class GoalTotalFragment : Fragment() {
         val root = inflater.inflate(R.layout.tab_goal_total, container, false)
         totalGoalsChart = root.findViewById(R.id.totalGoalChart)
         totalGoalsChart.visibility = View.INVISIBLE
+        //Further Stats
+        row00 = root.findViewById(R.id.row00)
+        row01 = root.findViewById(R.id.row01)
+        row02 = root.findViewById(R.id.row02)
+        row10 = root.findViewById(R.id.row10)
+        row11 = root.findViewById(R.id.row11)
+        row12 = root.findViewById(R.id.row12)
         //GoalData
         goalQuotaViewModel.listtotalgoals = ArrayList<PieEntry>()
         goalQuotaViewModel.listtotalgoals = (activity as MainActivity?)!!.getPieData()
+        goalQuotaViewModel.totalgames = (activity as MainActivity?)!!.getTotalGames()
         //prepareList()
         displayTotalGoalsChart()
+        displayFurtherStats()
         return root
     }
 
@@ -78,12 +97,24 @@ class GoalTotalFragment : Fragment() {
         }
     }
 
+    fun displayFurtherStats(){
+        row00.text = "Bis jetzt"
+        row01.text = goalQuotaViewModel.totalgames.toString()
+        row01.typeface = Typeface.DEFAULT_BOLD
+        row02.text = "Spiele gespielt"
+
+        row10.text = "Das entspricht ca."
+        row11.text = (round((goalQuotaViewModel.totalgames * 15.0)/60)).toString()
+        row11.typeface = Typeface.DEFAULT_BOLD
+        row12.text = "Stunden"
+    }
+
     private fun displayTotalGoalsChart() {
         var dataSetTotalGoals = PieDataSet(goalQuotaViewModel.listtotalgoals, "")
         //dataSetTotalGoals.valueFormatter = IValueFormatter(//)
         var colors = ArrayList<Int>()
-        colors.add(ContextCompat.getColor(context!!, R.color.colorLine2))
-        colors.add(ContextCompat.getColor(context!!, R.color.colorPrimary))
+        colors.add(ContextCompat.getColor(requireContext(), R.color.colorLine2))
+        colors.add(ContextCompat.getColor(requireContext(), R.color.colorPrimary))
         dataSetTotalGoals.colors = colors
         dataSetTotalGoals.valueFormatter
         dataSetTotalGoals.valueTextSize = 15F
@@ -95,7 +126,7 @@ class GoalTotalFragment : Fragment() {
         totalGoalsChart.data = data
         totalGoalsChart.setDrawEntryLabels(false)
         totalGoalsChart.centerText = "Insgesamt $totalgoals Tore"
-        totalGoalsChart.setCenterTextColor(ContextCompat.getColor(context!!, R.color.amoledBlack))
+        totalGoalsChart.setCenterTextColor(ContextCompat.getColor(requireContext(), R.color.amoledBlack))
         totalGoalsChart.description.isEnabled = false
         totalGoalsChart.legend.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
         totalGoalsChart.visibility = View.VISIBLE

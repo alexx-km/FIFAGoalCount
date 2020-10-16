@@ -91,11 +91,11 @@ class DailyReportFragment : Fragment() {
 
         var colors = ArrayList<Int>()
         if (statsViewModel.goalsAlex < statsViewModel.goalsHendrik) {
-            colors.add(ContextCompat.getColor(context!!, R.color.colorPrimary))
-            colors.add(ContextCompat.getColor(context!!, R.color.colorLine2))
+            colors.add(ContextCompat.getColor(requireContext(), R.color.colorPrimary))
+            colors.add(ContextCompat.getColor(requireContext(), R.color.colorLine2))
         } else {
-            colors.add(ContextCompat.getColor(context!!, R.color.colorLine2))
-            colors.add(ContextCompat.getColor(context!!, R.color.colorPrimary))
+            colors.add(ContextCompat.getColor(requireContext(), R.color.colorLine2))
+            colors.add(ContextCompat.getColor(requireContext(), R.color.colorPrimary))
         }
 
         set.colors = colors
@@ -116,7 +116,7 @@ class DailyReportFragment : Fragment() {
         val centerText = "Verteilung von $totalgoals $goals"
         piechart.centerText = centerText
         piechart.setCenterTextSize(15F)
-        piechart.setCenterTextColor(ContextCompat.getColor(context!!, R.color.amoledBlack))
+        piechart.setCenterTextColor(ContextCompat.getColor(requireContext(), R.color.amoledBlack))
         piechart.description!!.typeface = font
         piechart.isDrawHoleEnabled = true
         piechart.isHighlightPerTapEnabled = false

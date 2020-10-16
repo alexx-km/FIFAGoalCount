@@ -31,6 +31,7 @@ class DataFragment : Fragment() {
     val keyGoalsProgress = "com.porangidev.fifagoalcounter.ui.data.EXTRA_GOALS_PROGRESS"
     val keyDate = "com.porangidev.fifagoalcounter.ui.data.EXTRA_DATE"
     val keyId = "com.porangidev.fifagoalcounter.ui.data.EXTRA_ID"
+    val keyVersion = "com.porangidev.fifagoalcounter.ui.data.EXTRA_VERSION"
 
 
     private var keyPlayer1 = "key_player_1"
@@ -61,7 +62,7 @@ class DataFragment : Fragment() {
         recyclerView.adapter = adapter
         recyclerView.addOnItemTouchListener(
             RecyclerItemListener(
-                context!!,
+                requireContext(),
                 recyclerView,
                 object : RecyclerItemListener.OnItemClickListener {
                     override fun onItemClick(view: View, position: Int) {
@@ -104,6 +105,7 @@ class DataFragment : Fragment() {
                         bundle.putInt(keyGoalsAlex, currentGoalData.goalsAlex)
                         bundle.putInt(keyGoalsHendrik, currentGoalData.goalsHendrik)
                         bundle.putString(keyGoalsProgress, currentGoalData.goalsProgress)
+                        bundle.putString(keyVersion, currentGoalData.fifa_version)
                         view!!.findNavController().navigate(R.id.action_nav_data_to_adddata, bundle)
                     }
                 })
@@ -112,7 +114,7 @@ class DataFragment : Fragment() {
             view.findNavController().navigate(R.id.action_nav_data_to_adddata)
         }
         dataViewModel = ViewModelProviders.of(this).get(DataViewModel::class.java)
-        dataViewModel.getAllSessions().observe(this, Observer { GoalData ->
+        dataViewModel.getAllSessions().observe(viewLifecycleOwner, Observer { GoalData ->
             GoalData?.let { adapter.setGoalData(it) }
         })
 
@@ -155,7 +157,7 @@ class DataFragment : Fragment() {
 
     private fun deleteAll() {
         dataViewModel.deleteAllEntries()
-        Snackbar.make(view!!, "Alle Einträge gelöscht", Snackbar.LENGTH_SHORT)
+        Snackbar.make(requireView(), "Alle Einträge gelöscht", Snackbar.LENGTH_SHORT)
             .setAction("Action", null).show()
     }
 

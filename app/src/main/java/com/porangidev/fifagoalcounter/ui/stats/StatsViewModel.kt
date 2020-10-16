@@ -13,6 +13,7 @@ import com.porangidev.fifagoalcounter.GoalRepository
 class StatsViewModel(application: Application) : AndroidViewModel(application) {
 
     lateinit var listtotalgoals: ArrayList<PieEntry>
+    var totalgames = 0
     var goalsAlex = 0
     var goalsHendrik = 0
     var gamesPlayed = 0

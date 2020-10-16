@@ -11,7 +11,7 @@ import androidx.annotation.NonNull
 
 
 
-@Database(entities = [GoalData::class], version = 2)
+@Database(entities = [GoalData::class], version = 3)
 abstract class GoalDatabase: RoomDatabase() {
 
     abstract fun goalDao(): GoalDao
@@ -27,7 +27,7 @@ abstract class GoalDatabase: RoomDatabase() {
             }
             synchronized(this){
                 val instance = Room.databaseBuilder(context.applicationContext, GoalDatabase::class.java, "goal_database")
-                    .fallbackToDestructiveMigration().allowMainThreadQueries().addCallback(roomCallback).build()
+                    .addMigrations(MIGRATION_2_3).allowMainThreadQueries().addCallback(roomCallback).build()
                 INSTANCE = instance
                 return instance
             }
@@ -46,8 +46,8 @@ abstract class GoalDatabase: RoomDatabase() {
             private var goalDao: GoalDao = db.goalDao()
 
             override fun doInBackground(vararg voids: Void): Void? {
-                goalDao.insert(GoalData(1, 12, 7, 9, "hhhhaaaa", 397510577L))
-                goalDao.insert(GoalData(2, 10, 10, 5, "hhhhaaaa", 3947657862577L))
+                goalDao.insert(GoalData(1, 12, 7, 9, "hhhhaaaa", 397510577L, "FIFA 21"))
+                goalDao.insert(GoalData(2, 10, 10, 5, "hhhhaaaa", 3947657862577L, "FIFA 20"))
                 return null
             }
         }

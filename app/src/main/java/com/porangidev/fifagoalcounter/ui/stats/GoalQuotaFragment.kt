@@ -87,39 +87,40 @@ class GoalQuotaFragment : Fragment() {
         var goaldatalist = goalQuotaViewModel.getAllSessionsNonLive()
         goaldatasize = goaldatalist.size
 
-        goalDataAdapter.setGoalData(goaldatalist)
+        if (goaldatasize > 0){
+            goalDataAdapter.setGoalData(goaldatalist)
 
-        //text.text = goaldatasize.toString()
+            //text.text = goaldatasize.toString()
 
-        var currentGoalData: GoalData
-        //text.text = goaldatasize.toString()
+            var currentGoalData: GoalData
+            //text.text = goaldatasize.toString()
 
-        var newestGoalData = goalDataAdapter.getGoalDataAt(goaldatasize - 1)
-        lastplaydate = newestGoalData.playDate.toFloat()
+            var newestGoalData = goalDataAdapter.getGoalDataAt(goaldatasize - 1)
+            lastplaydate = newestGoalData.playDate.toFloat()
 
-        while (goaldatasize > 0) {
-            //get current goal data
-            currentGoalData = goalDataAdapter.getGoalDataAt(goaldatasize - 1)
-            //get goal quota and add to Entry
-            tempquotaalex = currentGoalData.getAlexQuota().toFloat()
+            while (goaldatasize > 0) {
+                //get current goal data
+                currentGoalData = goalDataAdapter.getGoalDataAt(goaldatasize - 1)
+                //get goal quota and add to Entry
+                tempquotaalex = currentGoalData.getAlexQuota().toFloat()
                 /*BigDecimal(currentGoalData.getAlexQuota()).setScale(2, RoundingMode.HALF_EVEN)
                     .toFloat()*/
-            tempquotahendrik = currentGoalData.getHendrikQuota().toFloat()
+                tempquotahendrik = currentGoalData.getHendrikQuota().toFloat()
                 /*BigDecimal(currentGoalData.getHendrikQuota()).setScale(2, RoundingMode.HALF_EVEN)
                     .toFloat()*/
-            listquotaalex.add(Entry(currentGoalData.playDate.toFloat(), tempquotaalex))
-            listquotahendrik.add(Entry(currentGoalData.playDate.toFloat(), tempquotahendrik))
-            goaldatasize -= 1
+                listquotaalex.add(Entry(currentGoalData.playDate.toFloat(), tempquotaalex))
+                listquotahendrik.add(Entry(currentGoalData.playDate.toFloat(), tempquotahendrik))
+                goaldatasize -= 1
+            }
         }
-
     }
 
     private fun displayQuotaChart() {
         var dataSetQuotaHendrik = LineDataSet(listquotahendrik, "Quote ${goalQuotaViewModel.player2}")
-        dataSetQuotaHendrik.color = ContextCompat.getColor(context!!, R.color.colorPrimary)
+        dataSetQuotaHendrik.color = ContextCompat.getColor(requireContext(), R.color.colorPrimary)
         dataSetQuotaHendrik.lineWidth = 2F
         var dataSetQuotaAlex = LineDataSet(listquotaalex, "Quote ${goalQuotaViewModel.player1}")
-        dataSetQuotaAlex.color = ContextCompat.getColor(context!!, R.color.colorLine2)
+        dataSetQuotaAlex.color = ContextCompat.getColor(requireContext(), R.color.colorLine2)
         dataSetQuotaAlex.lineWidth = 2F
 
         var xAxis = quotaChart.xAxis

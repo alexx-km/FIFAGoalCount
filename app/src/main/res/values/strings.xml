@@ -16,6 +16,12 @@
     <string name="menu_adddata">Neue Daten eingeben</string>
     <string name="menu_updatedata">Update eingeben</string>
 
+    //fragment_add_data
+    <string name="fifa_version">FIFA Version</string>
+    <string name="fifa_version_20">20</string>
+    <string name="fifa_version_21">21</string>
+    <string name="fifa_version_22">22</string>
+
     //OLD
     <string name="name_hendrik">Hendrik</string>
     <string name="name_alex">Alex</string>

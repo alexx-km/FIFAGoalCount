@@ -2,6 +2,20 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto">
     <PreferenceCategory
+            android:title="Spielversion auswählen"
+            app:iconSpaceReserved="false">
+        <ListPreference
+                android:iconSpaceReserved="false"
+                android:defaultValue="1"
+                android:entries="@array/FIFA_version"
+                android:entryValues="@array/FIFA_version_data"
+                android:key="version_preference"
+                android:title="FIFA Version"
+                app:iconSpaceReserved="false"
+                app:useSimpleSummaryProvider="true"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
             android:iconSpaceReserved="false"
             android:title="Spielernamen anpassen"
             app:iconSpaceReserved="false">
@@ -29,6 +43,7 @@
                 app:iconSpaceReserved="false"
                 app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
+
     <PreferenceCategory
             android:title="Spoiler "
             app:iconSpaceReserved="false">
@@ -46,6 +61,7 @@
                 android:title="Fortschritt anzeigen"
                 app:iconSpaceReserved="false" />
     </PreferenceCategory>
+
     <PreferenceCategory
             android:title="Optisch"
             app:iconSpaceReserved="false">
@@ -72,5 +88,6 @@
                 app:useSimpleSummaryProvider="true" />
 
     </PreferenceCategory>
+
 </PreferenceScreen>
 

@@ -37,6 +37,12 @@ class GoalDataAdapter : RecyclerView.Adapter<GoalDataAdapter.GoalDataHolder>() {
         holder.textviewgoalsscored.text = currentGoalData.getGoals().toString()
         holder.textviewgoalalex.text = currentGoalData.goalsAlex.toString()
         holder.textviewgoalhendrik.text = currentGoalData.goalsHendrik.toString()
+        when(currentGoalData.fifa_version){
+            "FIFA 20" -> holder.textviewversion.text = "20"
+            "FIFA 21" -> holder.textviewversion.text = "21"
+            "FIFA 22" -> holder.textviewversion.text = "22"
+            else -> holder.textviewversion.text = "Err"
+        }
     }
 
     class GoalDataHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -45,5 +51,6 @@ class GoalDataAdapter : RecyclerView.Adapter<GoalDataAdapter.GoalDataHolder>() {
         var textviewgoalsscored = itemView.findViewById<TextView>(R.id.text_view_goalsscored)
         var textviewgoalalex = itemView.findViewById<TextView>(R.id.text_view_goals_alex)
         var textviewgoalhendrik = itemView.findViewById<TextView>(R.id.text_view_goals_hendrik)
+        var textviewversion = itemView.findViewById<TextView>(R.id.text_view_version)
     }
 }

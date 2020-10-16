@@ -127,7 +127,7 @@ class GoalsFragment : Fragment(), OnItemSelectedListener {
             entries -= 1
         }
         datelist.add(DateFormat.format("dd/MM/yyyy", System.currentTimeMillis()).toString())
-        var spinnerAdapter = ArrayAdapter(context!!, android.R.layout.simple_spinner_item, datelist)
+        var spinnerAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, datelist)
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         goaldataSpinner.adapter = spinnerAdapter
         goaldataSpinner.onItemSelectedListener = this
@@ -174,9 +174,9 @@ class GoalsFragment : Fragment(), OnItemSelectedListener {
             }
         }
         var dataSetHendrik = LineDataSet(listgoalshendrik, "Tore ${goalQuotaViewModel.player2}")
-        dataSetHendrik.color = ContextCompat.getColor(context!!, R.color.colorLine1)
+        dataSetHendrik.color = ContextCompat.getColor(requireContext(), R.color.colorLine1)
         var dataSetAlex = LineDataSet(listgoalsalex, "Tore ${goalQuotaViewModel.player1}")
-        dataSetAlex.color = ContextCompat.getColor(context!!, R.color.colorLine2)
+        dataSetAlex.color = ContextCompat.getColor(requireContext(), R.color.colorLine2)
         dataSet = ArrayList()
         dataSet.clear()
         data.clearValues()

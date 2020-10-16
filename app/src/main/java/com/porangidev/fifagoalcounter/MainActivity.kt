@@ -1,39 +1,25 @@
 package com.porangidev.fifagoalcounter
 
-import android.content.Context
 import android.content.SharedPreferences
-import android.os.Build
 import android.os.Bundle
-import android.util.AttributeSet
+import android.view.Menu
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.drawerlayout.widget.DrawerLayout
-import com.google.android.material.navigation.NavigationView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
-import androidx.annotation.RequiresApi
-import androidx.preference.Preference
 import androidx.preference.PreferenceManager
-import androidx.viewpager.widget.ViewPager
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.PieEntry
-import com.google.android.material.tabs.TabLayout
+import com.google.android.material.navigation.NavigationView
 import com.porangidev.fifagoalcounter.ui.home.HomeFragment
-import com.porangidev.fifagoalcounter.ui.stats.GoalQuotaViewModel
-import com.porangidev.fifagoalcounter.ui.stats.StatsTabsAdapter
-import com.porangidev.fifagoalcounter.ui.tools.ToolsFragment
-import kotlinx.android.synthetic.main.fragment_stats.*
-import java.lang.reflect.Array
 
 class MainActivity : AppCompatActivity(), HomeFragment.OnFragmentHomeInteractionListener {
     //Shared Preferences
-    var prefs: SharedPreferences? = null
+    private lateinit  var prefs: SharedPreferences
     private var pref_key = "com.porangidev.fifagoalcounter.prefs"
     //Saved Data
     var goalsHendrik = 0
@@ -59,6 +45,7 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnFragmentHomeInteraction
     private lateinit var repository: GoalRepository
     private lateinit var goalDataAdapter: GoalDataAdapter
     private lateinit var listtotalgoals: ArrayList<PieEntry>
+    private var totalgames = 0
     private lateinit var listquotaplayer1: ArrayList<Entry>
     private lateinit var listquotaplayer2: ArrayList<Entry>
 
@@ -114,7 +101,7 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnFragmentHomeInteraction
         gamesPlayed = mgames_played
         elapsedGameTime = mgame_time
         goalProgress = mgoal_progress
-        val editor = prefs!!.edit()
+        val editor = prefs.edit()
         editor.putInt(keyGoalsHendrik, goalsHendrik)
         editor.putInt(keyGoalsHendrikTemp, goalsHendrikTemp)
         editor.putInt(keyGoalsAlex, goalsAlex)
@@ -136,41 +123,21 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnFragmentHomeInteraction
     }
 
     fun preparePieData(){
-        var goaldatalist = repository.getAllSessionsNonLive()
-        var goaldatasize = goaldatalist.size
-
-        goalDataAdapter.setGoalData(goaldatalist)
-
-        var currentGoalData: GoalData
-        var newestGoalData = goalDataAdapter.getGoalDataAt(goaldatasize - 1)
-        var lastplaydate = newestGoalData.playDate.toFloat()
-
-        var tempgoalsalex = 0
-        var tempgoalshendrik = 0
-        var tempquotaalex = 0F
-        var tempquotahendrik = 0F
-
-        while (goaldatasize > 0) {
-            //get current goal data
-            currentGoalData = goalDataAdapter.getGoalDataAt(goaldatasize - 1)
-            tempgoalsalex += currentGoalData.goalsAlex
-            tempgoalshendrik += currentGoalData.goalsHendrik
-            tempquotaalex = currentGoalData.getAlexQuota().toFloat()
-            tempquotahendrik = currentGoalData.getHendrikQuota().toFloat()
-            listquotaplayer1.add(Entry(currentGoalData.playDate.toFloat(), tempquotaalex))
-            listquotaplayer2.add(Entry(currentGoalData.playDate.toFloat(), tempquotahendrik))
-            goaldatasize -= 1
-        }
-        var player1 = prefs!!.getString(keyPlayer1, "")
-        var player2 = prefs!!.getString(keyPlayer2, "")
-        listtotalgoals.add(PieEntry(tempgoalsalex.toFloat(), "Tore ${player1}"))
-        listtotalgoals.add(PieEntry(tempgoalshendrik.toFloat(), "Tore ${player2}"))
-
-        //goals current matchday missing
+        val player1 = prefs.getString(keyPlayer1, "")
+        val player2 = prefs.getString(keyPlayer2, "")
+        val (tlistquotaplayer1, tlistquotaplayer2, ttotalgames, tlisttotalgoals) = DataHandler().preparePieData(repository, goalDataAdapter, player1, player2)
+        listquotaplayer1 = tlistquotaplayer1
+        listquotaplayer2 = tlistquotaplayer2
+        totalgames = ttotalgames
+        listtotalgoals = tlisttotalgoals
     }
 
     fun getPieData(): ArrayList<PieEntry> {
         return listtotalgoals
+    }
+
+    fun getTotalGames(): Int {
+        return totalgames
     }
 
     fun getQuotaDataPlayer1(): ArrayList<Entry>{
