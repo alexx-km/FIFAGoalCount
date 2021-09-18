@@ -66,8 +66,8 @@ class DailyReportFragment : Fragment() {
         statsViewModel.goalsAlex = prefs!!.getInt("KEY_GOALS_ALEX_PREFS", 0)
         statsViewModel.goalsHendrik = prefs!!.getInt("KEY_GOALS_HENDRIK_PREFS", 0)
         statsViewModel.gamesPlayed = prefs!!.getInt("KEY_GAMES_PLAYED_PREFS", 0)
-        statsViewModel.player1 = prefs!!.getString(keyPlayer1, "")
-        statsViewModel.player2 = prefs!!.getString(keyPlayer2, "")
+        statsViewModel.player1 = prefs!!.getString(keyPlayer1, "")!!
+        statsViewModel.player2 = prefs!!.getString(keyPlayer2, "")!!
         //change player text
         textplayer1.text = statsViewModel.player1
         textplayer2.text = statsViewModel.player2

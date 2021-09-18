@@ -21,6 +21,9 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import androidx.transition.AutoTransition
 import androidx.transition.TransitionManager
 import com.google.android.material.snackbar.Snackbar
+import com.porangidev.fifagoalcounter.goToFileIntent
+import java.io.File
+import java.util.*
 
 
 class DataFragment : Fragment() {
@@ -156,9 +159,28 @@ class DataFragment : Fragment() {
     }
 
     private fun deleteAll() {
-        dataViewModel.deleteAllEntries()
-        Snackbar.make(requireView(), "Alle Einträge gelöscht", Snackbar.LENGTH_SHORT)
-            .setAction("Action", null).show()
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle("Daten löschen?")
+        builder.setMessage("Bist du sicher?")
+        builder.setPositiveButton("Ja") { _, _ -> dataViewModel.deleteAllEntries(); Snackbar.make(requireView(), "Alle Einträge gelöscht", Snackbar.LENGTH_SHORT)
+            .setAction("Action", null).show()}
+        builder.setNegativeButton("Abbrechen") { _, _ -> adapter.notifyDataSetChanged()}
+        builder.create().show()
+    }
+
+    private fun exportDB() {
+        val backupDate = Calendar.getInstance().timeInMillis
+        val csvFileName = "db_Backup_$backupDate.csv"
+        val csvFile = File(requireContext().filesDir, csvFileName)
+        csvFile.createNewFile()
+        if(csvFile.exists()){
+            val intent = goToFileIntent(requireContext(), csvFile)
+            startActivity(intent)
+        }
+        else{
+            Toast.makeText(requireContext(), "Export fehlgeschlagen", Toast.LENGTH_LONG).show()
+        }
+
     }
 
 
@@ -172,6 +194,9 @@ class DataFragment : Fragment() {
         when (item.itemId) {
             R.id.action_delete_all -> {
                 deleteAll(); return true
+            }
+            R.id.action_export -> {
+                exportDB(); return true
             }
         }
         return super.onOptionsItemSelected(item)

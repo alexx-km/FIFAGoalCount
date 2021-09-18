@@ -86,7 +86,7 @@ class AddDataFragment : Fragment() {
                     requireArguments().getLong(keyDate)
                 ).toString()
             )
-            fifaVersion = requireArguments().getString(keyVersion)
+            fifaVersion = requireArguments().getString(keyVersion)!!
             nmbgoalsAlex.value = requireArguments().getInt(keyGoalsAlex)
             nmbgoalsHendrik.value = requireArguments().getInt(keyGoalsHendrik)
             nmbgamesPlayed.value = requireArguments().getInt(keyGamesPlayed)

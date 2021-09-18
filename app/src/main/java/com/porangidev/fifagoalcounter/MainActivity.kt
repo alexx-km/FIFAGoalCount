@@ -125,7 +125,10 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnFragmentHomeInteraction
     fun preparePieData(){
         val player1 = prefs.getString(keyPlayer1, "")
         val player2 = prefs.getString(keyPlayer2, "")
-        val (tlistquotaplayer1, tlistquotaplayer2, ttotalgames, tlisttotalgoals) = DataHandler().preparePieData(repository, goalDataAdapter, player1, player2)
+        val (tlistquotaplayer1, tlistquotaplayer2, ttotalgames, tlisttotalgoals) = DataHandler().preparePieData(repository, goalDataAdapter,
+            player1!!,
+            player2!!
+        )
         listquotaplayer1 = tlistquotaplayer1
         listquotaplayer2 = tlistquotaplayer2
         totalgames = ttotalgames

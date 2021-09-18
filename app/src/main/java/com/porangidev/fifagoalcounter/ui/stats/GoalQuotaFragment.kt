@@ -12,15 +12,18 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.preference.PreferenceManager
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.data.PieEntry
+import com.github.mikephil.charting.formatter.IAxisValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.porangidev.fifagoalcounter.*
 import java.text.DecimalFormat
+
 
 class GoalQuotaFragment : Fragment() {
 
@@ -54,8 +57,8 @@ class GoalQuotaFragment : Fragment() {
         //prepare view
         goalQuotaViewModel = ViewModelProviders.of(this).get(GoalQuotaViewModel::class.java)
         prefs = PreferenceManager.getDefaultSharedPreferences(context)
-        goalQuotaViewModel.player1 = prefs!!.getString(keyPlayer1, "")
-        goalQuotaViewModel.player2 = prefs!!.getString(keyPlayer2, "")
+        goalQuotaViewModel.player1 = prefs!!.getString(keyPlayer1, "")!!
+        goalQuotaViewModel.player2 = prefs!!.getString(keyPlayer2, "")!!
         repository = GoalRepository(GoalDatabase.INSTANCE!!.goalDao())
         goalDataAdapter = GoalDataAdapter()
         val root = inflater.inflate(R.layout.tab_goal_quota, container, false)
@@ -116,7 +119,10 @@ class GoalQuotaFragment : Fragment() {
     }
 
     private fun displayQuotaChart() {
-        var dataSetQuotaHendrik = LineDataSet(listquotahendrik, "Quote ${goalQuotaViewModel.player2}")
+        var dataSetQuotaHendrik = LineDataSet(
+            listquotahendrik,
+            "Quote ${goalQuotaViewModel.player2}"
+        )
         dataSetQuotaHendrik.color = ContextCompat.getColor(requireContext(), R.color.colorPrimary)
         dataSetQuotaHendrik.lineWidth = 2F
         var dataSetQuotaAlex = LineDataSet(listquotaalex, "Quote ${goalQuotaViewModel.player1}")

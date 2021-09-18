@@ -22,7 +22,7 @@ class DatePickerFragment(temp: EditText) : DialogFragment(), DatePickerDialog.On
         val day = c.get(Calendar.DAY_OF_MONTH)
 
         // Create a new instance of DatePickerDialog and return it
-        return DatePickerDialog(activity, this, year, month, day)
+        return DatePickerDialog(requireActivity(), this, year, month, day)
     }
 
     override fun onDateSet(view: DatePicker, year: Int, month: Int, day: Int) {

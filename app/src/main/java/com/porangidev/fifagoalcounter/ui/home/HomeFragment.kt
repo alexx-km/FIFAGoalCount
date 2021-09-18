@@ -138,10 +138,10 @@ class HomeFragment : Fragment(), View.OnClickListener {
         homeViewModel.goalsHendrik = prefs!!.getInt(keyGoalsHendrik, 0)
         homeViewModel.goalsHendrikTemp = prefs!!.getInt(keyGoalsHendrikTemp, 0)
         homeViewModel.gamesPlayed = prefs!!.getInt(keyGamesPlayed, 0)
-        homeViewModel.goalProgress = prefs!!.getString(keyGoalProgress, "")
+        homeViewModel.goalProgress = prefs!!.getString(keyGoalProgress, "")!!
         homeViewModel.ellapsedGameTime = prefs!!.getLong(keyElapsedGameTime, 0L)
-        homeViewModel.player1 = prefs!!.getString(keyPlayer1, "")
-        homeViewModel.player2 = prefs!!.getString(keyPlayer2, "")
+        homeViewModel.player1 = prefs!!.getString(keyPlayer1, "")!!
+        homeViewModel.player2 = prefs!!.getString(keyPlayer2, "")!!
         gameDate = prefs!!.getLong(keyGameDate, 0L)
         //Show Text from SharedPreferences
         if (showSpoiler) {

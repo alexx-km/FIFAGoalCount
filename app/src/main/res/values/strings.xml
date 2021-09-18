@@ -42,4 +42,5 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="action_delete_all">Alle Löschen</string>
+    <string name="action_export">Exportieren</string>
 </resources>

@@ -27,8 +27,8 @@ class StatsFragment : Fragment() {
         //prepare view
         statsViewModel = ViewModelProviders.of(this).get(StatsViewModel::class.java)
         prefs = PreferenceManager.getDefaultSharedPreferences(context)
-        statsViewModel.player1 = prefs!!.getString(keyPlayer1, "")
-        statsViewModel.player2 = prefs!!.getString(keyPlayer2, "")
+        statsViewModel.player1 = prefs!!.getString(keyPlayer1, "")!!
+        statsViewModel.player2 = prefs!!.getString(keyPlayer2, "")!!
         //init lists
         val root = inflater.inflate(R.layout.fragment_stats, container, false)
         return root

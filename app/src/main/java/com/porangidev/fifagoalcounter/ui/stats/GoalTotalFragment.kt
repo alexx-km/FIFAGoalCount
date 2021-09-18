@@ -67,8 +67,8 @@ class GoalTotalFragment : Fragment() {
         //prepare view
         goalQuotaViewModel = ViewModelProviders.of(this).get(StatsViewModel::class.java)
         prefs = PreferenceManager.getDefaultSharedPreferences(context)
-        goalQuotaViewModel.player1 = prefs!!.getString(keyPlayer1, "")
-        goalQuotaViewModel.player2 = prefs!!.getString(keyPlayer2, "")
+        goalQuotaViewModel.player1 = prefs!!.getString(keyPlayer1, "")!!
+        goalQuotaViewModel.player2 = prefs!!.getString(keyPlayer2, "")!!
         val root = inflater.inflate(R.layout.tab_goal_total, container, false)
         totalGoalsChart = root.findViewById(R.id.totalGoalChart)
         totalGoalsChart.visibility = View.INVISIBLE

@@ -54,9 +54,9 @@ class GoalsFragment : Fragment(), OnItemSelectedListener {
         //prepare view
         goalQuotaViewModel = ViewModelProviders.of(this).get(GoalQuotaViewModel::class.java)
         prefs = PreferenceManager.getDefaultSharedPreferences(context)
-        goalprogress = prefs!!.getString(keyGoalProgress, "")
-        goalQuotaViewModel.player1 = prefs!!.getString(keyPlayer1, "")
-        goalQuotaViewModel.player2 = prefs!!.getString(keyPlayer2, "")
+        goalprogress = prefs!!.getString(keyGoalProgress, "")!!
+        goalQuotaViewModel.player1 = prefs!!.getString(keyPlayer1, "")!!
+        goalQuotaViewModel.player2 = prefs!!.getString(keyPlayer2, "")!!
         val root = inflater.inflate(R.layout.tab_goals, container, false)
         //views by id
         val textview = root.findViewById<TextView>(R.id.textView8)
@@ -103,7 +103,7 @@ class GoalsFragment : Fragment(), OnItemSelectedListener {
             if (position == tempentries) {
                 //Toast.makeText(context, "position==tempentries", Toast.LENGTH_LONG).show()
                 graph.data.clearValues()
-                graph.data = makeEntries(prefs!!.getString(keyGoalProgress, ""))
+                graph.data = makeEntries(prefs!!.getString(keyGoalProgress, "")!!)
                 graph.animateX(1500, Easing.EaseInOutQuad)
             } else {
                 var currentgoaldata = goalDataAdapter.getGoalDataAt(tempentries - position - 1)
