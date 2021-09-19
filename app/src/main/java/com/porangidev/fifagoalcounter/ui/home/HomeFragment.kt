@@ -339,7 +339,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
         if (enabled) {
             viewKonfetti.build().addColors(color1, color2).setDirection(0.0, 359.0)
                 .setSpeed(1f, 5f).setFadeOutEnabled(true).setTimeToLive(2000L)
-                .addShapes(Shape.RECT, Shape.CIRCLE)
+                .addShapes(Shape.Square, Shape.Circle)
                 .addSizes(Size(8)).setPosition(-50f, viewKonfetti.width + 50f, -50f, -50f)
                 .streamFor((konfettiamount), 3000L)
         }

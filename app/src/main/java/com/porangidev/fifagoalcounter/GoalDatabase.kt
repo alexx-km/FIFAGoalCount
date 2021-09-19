@@ -42,7 +42,7 @@ abstract class GoalDatabase: RoomDatabase() {
             }
         }
 
-        private class PopulateDbAsyncTask internal constructor(db: GoalDatabase) : AsyncTask<Void, Void, Void>() {
+        private class PopulateDbAsyncTask(db: GoalDatabase) : AsyncTask<Void, Void, Void>() {
 
             // private var goalDao: GoalDao = db.goalDao()
 

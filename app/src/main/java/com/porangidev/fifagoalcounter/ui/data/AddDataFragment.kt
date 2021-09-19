@@ -101,7 +101,7 @@ class AddDataFragment : Fragment() {
         ) }
 
         when(fifaVersion){
-            "FIFA 20" -> btn_group_version.check(btn_version_20.id);
+            "FIFA 20" -> btn_group_version.check(btn_version_20.id)
             "FIFA 21" -> btn_group_version.check(btn_version_21.id)
         }
 

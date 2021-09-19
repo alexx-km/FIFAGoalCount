@@ -43,28 +43,28 @@ class GoalRepository(private var goalDao: GoalDao) {
         return allEntriesNonLive
     }
 
-    private class InsertGoalDataAsyncTask internal constructor(private val mGoalDao: GoalDao) : AsyncTask<GoalData, Void, Void>() {
+    private class InsertGoalDataAsyncTask(private val mGoalDao: GoalDao) : AsyncTask<GoalData, Void, Void>() {
 
         override fun doInBackground(vararg params: GoalData): Void? {
             mGoalDao.insert(params[0])
             return null
         }
     }
-    private class UpdateGoalDataAsyncTask internal constructor(private val mGoalDao: GoalDao) : AsyncTask<GoalData, Void, Void>() {
+    private class UpdateGoalDataAsyncTask(private val mGoalDao: GoalDao) : AsyncTask<GoalData, Void, Void>() {
 
         override fun doInBackground(vararg params: GoalData): Void? {
             mGoalDao.update(params[0])
             return null
         }
     }
-    private class DeleteGoalDataAsyncTask internal constructor(private val mGoalDao: GoalDao) : AsyncTask<GoalData, Void, Void>() {
+    private class DeleteGoalDataAsyncTask(private val mGoalDao: GoalDao) : AsyncTask<GoalData, Void, Void>() {
 
         override fun doInBackground(vararg params: GoalData): Void? {
             mGoalDao.delete(params[0])
             return null
         }
     }
-    private class DeleteAllEntriesAsyncTask internal constructor(private val mGoalDao: GoalDao) : AsyncTask<Void, Void, Void>() {
+    private class DeleteAllEntriesAsyncTask(private val mGoalDao: GoalDao) : AsyncTask<Void, Void, Void>() {
 
         override fun doInBackground(vararg params: Void): Void? {
             mGoalDao.deleteAllEntries()
