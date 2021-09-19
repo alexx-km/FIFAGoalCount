@@ -72,7 +72,7 @@
                     android:id="@+id/rowSecondFirst"
                     android:layout_column="1"
                     android:layout_gravity="center|start"
-                    android:text="@string/name_hendrik"
+                    android:text="@string/name_player2"
                     android:textAlignment="center"
                     android:textSize="18sp" />
 
@@ -100,7 +100,7 @@
                     android:id="@+id/rowThirdFirst"
                     android:layout_column="1"
                     android:layout_gravity="center|start"
-                    android:text="@string/name_alex"
+                    android:text="@string/name_player1"
                     android:textAlignment="center"
                     android:textSize="18sp" />
 

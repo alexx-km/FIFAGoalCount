@@ -35,8 +35,8 @@ class GoalQuotaViewModel(application: Application) : AndroidViewModel(applicatio
         value = "This is stats Fragment"
     }
     val text: LiveData<String> = _text
-    var goalsAlex = 0
-    var goalsHendrik = 0
+    var goalsPlayer1 = 0
+    var goalsPlayer2 = 0
     var gamesPlayed = 0
     var goalProgress = ""
     var goalProgressTemp = ""

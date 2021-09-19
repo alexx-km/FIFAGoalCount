@@ -25,12 +25,12 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.13" />
         <NumberPicker android:layout_width="wrap_content" android:layout_height="wrap_content"
-                      android:id="@+id/mgoals_hendrik" app:layout_constraintTop_toTopOf="parent"
+                      android:id="@+id/mgoals_player2" app:layout_constraintTop_toTopOf="parent"
                       app:layout_constraintBottom_toBottomOf="parent"
                       app:layout_constraintEnd_toEndOf="parent"
                       app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.13"/>
         <NumberPicker android:layout_width="wrap_content" android:layout_height="wrap_content"
-                      android:id="@+id/mgoals_alex" app:layout_constraintTop_toTopOf="parent"
+                      android:id="@+id/mgoals_player1" app:layout_constraintTop_toTopOf="parent"
                       app:layout_constraintBottom_toBottomOf="parent"
                       app:layout_constraintEnd_toEndOf="parent"
                       app:layout_constraintStart_toStartOf="parent"/>
@@ -48,22 +48,22 @@
                 app:layout_constraintBottom_toTopOf="@+id/edit_date"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
         <TextView
-                android:text="Tore Hendrik"
+                android:text="Tore Player2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/edit_date"
-                app:layout_constraintBottom_toTopOf="@+id/mgoals_hendrik"
-                app:layout_constraintStart_toStartOf="@+id/mgoals_hendrik"
-                app:layout_constraintEnd_toEndOf="@+id/mgoals_hendrik" app:layout_constraintVertical_bias="0.8"
+                app:layout_constraintBottom_toTopOf="@+id/mgoals_player2"
+                app:layout_constraintStart_toStartOf="@+id/mgoals_player2"
+                app:layout_constraintEnd_toEndOf="@+id/mgoals_player2" app:layout_constraintVertical_bias="0.8"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
         <TextView
-                android:text="Tore Alex"
+                android:text="Tore Player1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/edit_date"
-                app:layout_constraintBottom_toTopOf="@+id/mgoals_alex"
-                app:layout_constraintEnd_toEndOf="@+id/mgoals_alex"
-                app:layout_constraintStart_toStartOf="@+id/mgoals_alex" app:layout_constraintVertical_bias="0.8"
+                app:layout_constraintBottom_toTopOf="@+id/mgoals_player1"
+                app:layout_constraintEnd_toEndOf="@+id/mgoals_player1"
+                app:layout_constraintStart_toStartOf="@+id/mgoals_player1" app:layout_constraintVertical_bias="0.8"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
         <TextView
                 android:text="Spiele"
@@ -84,7 +84,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/mgoal_progress"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/mgoals_alex"
+                app:layout_constraintTop_toBottomOf="@+id/mgoals_player1"
                 app:layout_constraintVertical_bias="0.49" />
 
         <EditText

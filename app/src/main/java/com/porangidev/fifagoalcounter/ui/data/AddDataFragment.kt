@@ -19,8 +19,8 @@ import java.util.*
 
 class AddDataFragment : Fragment() {
 
-    private val keyGoalsAlex = "com.porangidev.fifagoalcounter.ui.data.EXTRA_GOALS_ALEX"
-    private val keyGoalsHendrik = "com.porangidev.fifagoalcounter.ui.data.EXTRA_GOALS_HENDRIK"
+    private val keyGoalsPlayer1 = "com.porangidev.fifagoalcounter.ui.data.EXTRA_GOALS_PLAYER1"
+    private val keyGoalsPlayer2 = "com.porangidev.fifagoalcounter.ui.data.EXTRA_GOALS_PLAYER2"
     private val keyGamesPlayed = "com.porangidev.fifagoalcounter.ui.data.EXTRA_GAMES_PLAYED"
     private val keyGoalsProgress = "com.porangidev.fifagoalcounter.ui.data.EXTRA_GOALS_PROGRESS"
     private val keyDate = "com.porangidev.fifagoalcounter.ui.data.EXTRA_DATE"
@@ -30,8 +30,8 @@ class AddDataFragment : Fragment() {
     private lateinit var dataViewModel: DataViewModel
 
     private lateinit var datepicker: EditText
-    private lateinit var nmbgoalsHendrik: NumberPicker
-    private lateinit var nmbgoalsAlex: NumberPicker
+    private lateinit var nmbgoalsPlayer2: NumberPicker
+    private lateinit var nmbgoalsPlayer1: NumberPicker
     private lateinit var nmbgamesPlayed: NumberPicker
     private lateinit var goalprogress: EditText
     private lateinit var btn_group_version: RadioGroup
@@ -44,8 +44,8 @@ class AddDataFragment : Fragment() {
     private var goalProgress: String = ""
     private var date: String = ""
     private var gamesPlayed: Int = 0
-    private var goalsAlex: Int = 0
-    private var goalsHendrik: Int = 0
+    private var goalsPlayer1: Int = 0
+    private var goalsPlayer2: Int = 0
     private var mid = 0
     private var isUpdate = false
 
@@ -57,8 +57,8 @@ class AddDataFragment : Fragment() {
     ): View? {
         val root = inflater.inflate(R.layout.fragment_add_data, container, false)
         datepicker = root.findViewById(R.id.edit_date)
-        nmbgoalsHendrik = root.findViewById(R.id.mgoals_hendrik)
-        nmbgoalsAlex = root.findViewById(R.id.mgoals_alex)
+        nmbgoalsPlayer2 = root.findViewById(R.id.mgoals_player2)
+        nmbgoalsPlayer1 = root.findViewById(R.id.mgoals_player1)
         nmbgamesPlayed = root.findViewById(R.id.mgames_played)
         goalprogress = root.findViewById(R.id.mgoal_progress)
         btn_group_version = root.findViewById(R.id.button_group_version)
@@ -71,11 +71,11 @@ class AddDataFragment : Fragment() {
         dataViewModel = ViewModelProviders.of(this).get(DataViewModel::class.java)
 
         nmbgamesPlayed.minValue = 1
-        nmbgoalsHendrik.minValue = 0
-        nmbgoalsAlex.minValue = 0
+        nmbgoalsPlayer2.minValue = 0
+        nmbgoalsPlayer1.minValue = 0
         nmbgamesPlayed.maxValue = 50
-        nmbgoalsHendrik.maxValue = 50
-        nmbgoalsAlex.maxValue = 50
+        nmbgoalsPlayer2.maxValue = 50
+        nmbgoalsPlayer1.maxValue = 50
 
         if (arguments != null) {
             isUpdate = true
@@ -87,8 +87,8 @@ class AddDataFragment : Fragment() {
                 ).toString()
             )
             fifaVersion = requireArguments().getString(keyVersion)!!
-            nmbgoalsAlex.value = requireArguments().getInt(keyGoalsAlex)
-            nmbgoalsHendrik.value = requireArguments().getInt(keyGoalsHendrik)
+            nmbgoalsPlayer1.value = requireArguments().getInt(keyGoalsPlayer1)
+            nmbgoalsPlayer2.value = requireArguments().getInt(keyGoalsPlayer2)
             nmbgamesPlayed.value = requireArguments().getInt(keyGamesPlayed)
             goalprogress.setText(requireArguments().getString(keyGoalsProgress))
         } else {
@@ -128,8 +128,8 @@ class AddDataFragment : Fragment() {
 
     private fun save() {
         date = datepicker.text.toString()
-        goalsHendrik = nmbgoalsHendrik.value
-        goalsAlex = nmbgoalsAlex.value
+        goalsPlayer2 = nmbgoalsPlayer2.value
+        goalsPlayer1 = nmbgoalsPlayer1.value
         gamesPlayed = nmbgamesPlayed.value
         goalProgress = goalprogress.text.toString()
 
@@ -137,12 +137,12 @@ class AddDataFragment : Fragment() {
         val simpledate = simpledateformat.parse(date)
         val mdate: Long = simpledate.time
 
-        val goalProgressNew = checkString(goalProgress, gamesPlayed, goalsAlex, goalsHendrik)
+        val goalProgressNew = checkString(goalProgress, gamesPlayed, goalsPlayer1, goalsPlayer2)
 
         val goalData = GoalData(
             null,
-            goalsAlex,
-            goalsHendrik,
+            goalsPlayer1,
+            goalsPlayer2,
             gamesPlayed,
             goalProgressNew,
             mdate,
@@ -156,8 +156,8 @@ class AddDataFragment : Fragment() {
 
     private fun update() {
         date = datepicker.text.toString()
-        goalsHendrik = nmbgoalsHendrik.value
-        goalsAlex = nmbgoalsAlex.value
+        goalsPlayer2 = nmbgoalsPlayer2.value
+        goalsPlayer1 = nmbgoalsPlayer1.value
         gamesPlayed = nmbgamesPlayed.value
         goalProgress = goalprogress.text.toString()
 
@@ -165,12 +165,12 @@ class AddDataFragment : Fragment() {
         val simpledate = simpledateformat.parse(date)
         val mdate: Long = simpledate.time
 
-        val goalProgressNew = checkString(goalProgress, gamesPlayed, goalsAlex, goalsHendrik)
+        val goalProgressNew = checkString(goalProgress, gamesPlayed, goalsPlayer1, goalsPlayer2)
 
         val goalData = GoalData(
             null,
-            goalsAlex,
-            goalsHendrik,
+            goalsPlayer1,
+            goalsPlayer2,
             gamesPlayed,
             goalProgressNew,
             mdate,
@@ -185,10 +185,10 @@ class AddDataFragment : Fragment() {
         view?.findNavController()?.navigate(R.id.action_nav_adddata_to_data)
     }
 
-    private fun checkString(string: String, games: Int, galex: Int, ghendrik: Int): String {
+    private fun checkString(string: String, games: Int, gplayer1: Int, gplayer2: Int): String {
         val newstring: String
-        if (string.length != galex+ghendrik) {
-            newstring = "a".repeat(galex) + "h".repeat(ghendrik)
+        if (string.length != gplayer1+gplayer2) {
+            newstring = "a".repeat(gplayer1) + "h".repeat(gplayer2)
             Toast.makeText(context, "String wegen Fehler neu generiert", Toast.LENGTH_LONG).show()
             return newstring
         }

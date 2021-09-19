@@ -23,13 +23,13 @@
     <string name="fifa_version_22">22</string>
 
     //OLD
-    <string name="name_hendrik">Hendrik</string>
-    <string name="name_alex">Alex</string>
+    <string name="name_player2">Player2</string>
+    <string name="name_player1">Player1</string>
     <string name="player">Spieler</string>
     <string name="goalpergame">Tore \npro Spiel</string>
     <string name="goalstotal">Tore \n insgesamt</string>
-    <string name="goals_hendrik">Tor Hendrik</string>
-    <string name="goals_alex">Tor Alex</string>
+    <string name="goals_player2">Tor Player2</string>
+    <string name="goals_player1">Tor Player1</string>
     <string name="goals">TORE</string>
     <string name="goals_zero">0</string>
     <string name="minus">-</string>

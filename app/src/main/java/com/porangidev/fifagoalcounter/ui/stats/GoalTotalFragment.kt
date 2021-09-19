@@ -38,8 +38,8 @@ class GoalTotalFragment : Fragment() {
     var prefs: SharedPreferences? = null
 
     private var goaldatasize = 0
-    private var tempgoalsalex = 0
-    private var tempgoalshendrik = 0
+    private var tempgoalsplayer1 = 0
+    private var tempgoalsplayer2 = 0
     private var lastplaydate = 0F
 
     private var _visiblefirsttime = false

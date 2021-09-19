@@ -63,8 +63,8 @@ class DailyReportFragment : Fragment() {
         piechart = root.findViewById(R.id.pie_chart)
         piechart.visibility = View.INVISIBLE
         //write data to viewmodel
-        statsViewModel.goalsAlex = prefs!!.getInt("KEY_GOALS_ALEX_PREFS", 0)
-        statsViewModel.goalsHendrik = prefs!!.getInt("KEY_GOALS_HENDRIK_PREFS", 0)
+        statsViewModel.goalsPlayer1 = prefs!!.getInt("KEY_GOALS_PLAYER1_PREFS", 0)
+        statsViewModel.goalsPlayer2 = prefs!!.getInt("KEY_GOALS_PLAYER2_PREFS", 0)
         statsViewModel.gamesPlayed = prefs!!.getInt("KEY_GAMES_PLAYED_PREFS", 0)
         statsViewModel.player1 = prefs!!.getString(keyPlayer1, "")!!
         statsViewModel.player2 = prefs!!.getString(keyPlayer2, "")!!
@@ -84,13 +84,13 @@ class DailyReportFragment : Fragment() {
 
     private fun updateChart() {
         var entries = ArrayList<PieEntry>()
-        entries.add(PieEntry(statsViewModel.goalsHendrik.toFloat(), statsViewModel.player2))
-        entries.add(PieEntry(statsViewModel.goalsAlex.toFloat(), statsViewModel.player1))
+        entries.add(PieEntry(statsViewModel.goalsPlayer2.toFloat(), statsViewModel.player2))
+        entries.add(PieEntry(statsViewModel.goalsPlayer1.toFloat(), statsViewModel.player1))
         var set = PieDataSet(entries, "")
         set.valueTextSize = 0F
 
         var colors = ArrayList<Int>()
-        if (statsViewModel.goalsAlex < statsViewModel.goalsHendrik) {
+        if (statsViewModel.goalsPlayer1 < statsViewModel.goalsPlayer2) {
             colors.add(ContextCompat.getColor(requireContext(), R.color.colorPrimary))
             colors.add(ContextCompat.getColor(requireContext(), R.color.colorLine2))
         } else {
@@ -109,7 +109,7 @@ class DailyReportFragment : Fragment() {
         piechart.legend.typeface = font
         piechart.legend.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
         piechart.description.isEnabled = false
-        val totalgoals = statsViewModel.goalsAlex + statsViewModel.goalsHendrik
+        val totalgoals = statsViewModel.goalsPlayer1 + statsViewModel.goalsPlayer2
         val goals = if (totalgoals > 1 || totalgoals == 0) {
             "Toren"
         } else "Tor"
@@ -129,16 +129,16 @@ class DailyReportFragment : Fragment() {
             return
         } else {
             //Calculate Goals/Game Rate
-            val gpgHendrik = ((statsViewModel.goalsHendrik.toDouble()) / statsViewModel.gamesPlayed)
-            val gpgAlex = ((statsViewModel.goalsAlex.toDouble()) / statsViewModel.gamesPlayed)
+            val gpgPlayer2 = ((statsViewModel.goalsPlayer2.toDouble()) / statsViewModel.gamesPlayed)
+            val gpgPlayer1 = ((statsViewModel.goalsPlayer1.toDouble()) / statsViewModel.gamesPlayed)
             val gpgTogether =
-                (((statsViewModel.goalsAlex + statsViewModel.goalsHendrik).toDouble()) / statsViewModel.gamesPlayed)
-            rowsecondsecond?.text = String.format("%.2f", gpgHendrik)
-            rowthirdsecond?.text = String.format("%.2f", gpgAlex)
+                (((statsViewModel.goalsPlayer1 + statsViewModel.goalsPlayer2).toDouble()) / statsViewModel.gamesPlayed)
+            rowsecondsecond?.text = String.format("%.2f", gpgPlayer2)
+            rowthirdsecond?.text = String.format("%.2f", gpgPlayer1)
             rowfourthsecond?.text = String.format("%.2f", gpgTogether)
-            rowsecondthird?.text = statsViewModel.goalsHendrik.toString()
-            rowthirdthird?.text = statsViewModel.goalsAlex.toString()
-            rowfourththird?.text = (statsViewModel.goalsAlex + statsViewModel.goalsHendrik).toString()
+            rowsecondthird?.text = statsViewModel.goalsPlayer2.toString()
+            rowthirdthird?.text = statsViewModel.goalsPlayer1.toString()
+            rowfourththird?.text = (statsViewModel.goalsPlayer1 + statsViewModel.goalsPlayer2).toString()
         }
     }
 }

@@ -28,8 +28,8 @@ import java.util.*
 
 class DataFragment : Fragment() {
 
-    val keyGoalsAlex = "com.porangidev.fifagoalcounter.ui.data.EXTRA_GOALS_ALEX"
-    val keyGoalsHendrik = "com.porangidev.fifagoalcounter.ui.data.EXTRA_GOALS_HENDRIK"
+    val keyGoalsPlayer1 = "com.porangidev.fifagoalcounter.ui.data.EXTRA_GOALS_PLAYER1"
+    val keyGoalsPlayer2 = "com.porangidev.fifagoalcounter.ui.data.EXTRA_GOALS_PLAYER2"
     val keyGamesPlayed = "com.porangidev.fifagoalcounter.ui.data.EXTRA_GAMES_PLAYED"
     val keyGoalsProgress = "com.porangidev.fifagoalcounter.ui.data.EXTRA_GOALS_PROGRESS"
     val keyDate = "com.porangidev.fifagoalcounter.ui.data.EXTRA_DATE"
@@ -40,9 +40,9 @@ class DataFragment : Fragment() {
     private var keyPlayer1 = "key_player_1"
     private var keyPlayer2 = "key_player_2"
 
-    private lateinit var textalex: TextView
+    private lateinit var textplayer1: TextView
     private lateinit var texttextplayer1: TextView
-    private lateinit var texthendrik: TextView
+    private lateinit var textplayer2: TextView
     private lateinit var texttextplayer2: TextView
 
     private lateinit var dataViewModel: DataViewModel
@@ -76,25 +76,25 @@ class DataFragment : Fragment() {
                         val player2 = "Tore " + prefs!!.getString(keyPlayer2, "")
                         texttextplayer1.text = player1
                         texttextplayer2.text = player2
-                        textalex = view.findViewById(R.id.text_view_goals_alex)
-                        texthendrik = view.findViewById(R.id.text_view_goals_hendrik)
-                        if (textalex.visibility == View.GONE) {
+                        textplayer1 = view.findViewById(R.id.text_view_goals_player1)
+                        textplayer2 = view.findViewById(R.id.text_view_goals_player2)
+                        if (textplayer1.visibility == View.GONE) {
                             TransitionManager.beginDelayedTransition(
                                 recyclerView,
                                 AutoTransition().setDuration(130L)
                             )
-                            textalex.visibility = View.VISIBLE
+                            textplayer1.visibility = View.VISIBLE
                             texttextplayer1.visibility = View.VISIBLE
-                            texthendrik.visibility = View.VISIBLE
+                            textplayer2.visibility = View.VISIBLE
                             texttextplayer2.visibility = View.VISIBLE
                         } else {
                             TransitionManager.beginDelayedTransition(
                                 recyclerView,
                                 AutoTransition().setDuration(130L)
                             )
-                            textalex.visibility = View.GONE
+                            textplayer1.visibility = View.GONE
                             texttextplayer1.visibility = View.GONE
-                            texthendrik.visibility = View.GONE
+                            textplayer2.visibility = View.GONE
                             texttextplayer2.visibility = View.GONE
                         }
                     }
@@ -105,8 +105,8 @@ class DataFragment : Fragment() {
                         bundle.putInt(keyId, currentGoalData.id!!)
                         bundle.putLong(keyDate, currentGoalData.playDate)
                         bundle.putInt(keyGamesPlayed, currentGoalData.playedGames)
-                        bundle.putInt(keyGoalsAlex, currentGoalData.goalsAlex)
-                        bundle.putInt(keyGoalsHendrik, currentGoalData.goalsHendrik)
+                        bundle.putInt(keyGoalsPlayer1, currentGoalData.goalsPlayer1)
+                        bundle.putInt(keyGoalsPlayer2, currentGoalData.goalsPlayer2)
                         bundle.putString(keyGoalsProgress, currentGoalData.goalsProgress)
                         bundle.putString(keyVersion, currentGoalData.fifa_version)
                         view!!.findNavController().navigate(R.id.action_nav_data_to_adddata, bundle)

@@ -35,8 +35,8 @@ class GoalDataAdapter : RecyclerView.Adapter<GoalDataAdapter.GoalDataHolder>() {
         holder.textviewdate.text = DateFormat.format("dd/MM/yyyy", currentGoalData.playDate).toString()
         holder.textviewgamesplayed.text = currentGoalData.playedGames.toString()
         holder.textviewgoalsscored.text = currentGoalData.getGoals().toString()
-        holder.textviewgoalalex.text = currentGoalData.goalsAlex.toString()
-        holder.textviewgoalhendrik.text = currentGoalData.goalsHendrik.toString()
+        holder.textviewgoalplayer1.text = currentGoalData.goalsPlayer1.toString()
+        holder.textviewgoalplayer2.text = currentGoalData.goalsPlayer2.toString()
         when(currentGoalData.fifa_version){
             "FIFA 20" -> holder.textviewversion.text = "20"
             "FIFA 21" -> holder.textviewversion.text = "21"
@@ -49,8 +49,8 @@ class GoalDataAdapter : RecyclerView.Adapter<GoalDataAdapter.GoalDataHolder>() {
         var textviewdate = itemView.findViewById<TextView>(R.id.text_view_date)
         var textviewgamesplayed = itemView.findViewById<TextView>(R.id.text_view_gamesplayed)
         var textviewgoalsscored = itemView.findViewById<TextView>(R.id.text_view_goalsscored)
-        var textviewgoalalex = itemView.findViewById<TextView>(R.id.text_view_goals_alex)
-        var textviewgoalhendrik = itemView.findViewById<TextView>(R.id.text_view_goals_hendrik)
+        var textviewgoalplayer1 = itemView.findViewById<TextView>(R.id.text_view_goals_player1)
+        var textviewgoalplayer2 = itemView.findViewById<TextView>(R.id.text_view_goals_player2)
         var textviewversion = itemView.findViewById<TextView>(R.id.text_view_version)
     }
 }

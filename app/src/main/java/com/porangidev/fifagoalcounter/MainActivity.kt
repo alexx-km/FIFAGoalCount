@@ -22,20 +22,20 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnFragmentHomeInteraction
     private lateinit  var prefs: SharedPreferences
     private var pref_key = "com.porangidev.fifagoalcounter.prefs"
     //Saved Data
-    var goalsHendrik = 0
-    var goalsHendrikTemp = 0
-    var goalsAlex = 0
-    var goalsAlexTemp = 0
+    var goalsPlayer2 = 0
+    var goalsPlayer2Temp = 0
+    var goalsPlayer1 = 0
+    var goalsPlayer1Temp = 0
     var gamesPlayed = 0
     var elapsedGameTime = 0L
     var goalProgress = ""
     //Data keys
     var keyPlayer1 = "key_player_1"
     var keyPlayer2 = "key_player_2"
-    var keyGoalsHendrik = "KEY_GOALS_HENDRIK_PREFS"
-    var keyGoalsHendrikTemp = "KEY_GOALS_HENDRIK_TEMP_PREFS"
-    var keyGoalsAlex = "KEY_GOALS_ALEX_PREFS"
-    var keyGoalsAlexTemp = "KEY_GOALS_ALEX_TEMP_PREFS"
+    var keyGoalsPlayer2 = "KEY_GOALS_PLAYER2_PREFS"
+    var keyGoalsPlayer2Temp = "KEY_GOALS_PLAYER2_TEMP_PREFS"
+    var keyGoalsPlayer1 = "KEY_GOALS_PLAYER1_PREFS"
+    var keyGoalsPlayer1Temp = "KEY_GOALS_PLAYER1_TEMP_PREFS"
     var keyGamesPlayed = "KEY_GAMES_PLAYED_PREFS"
     var keyElapsedGameTime = "KEY_ELAPSED_GAME_TIME_PREFS"
     var keyGoalProgress = "KEY_GOAL_PROGRESS_PREFS"
@@ -86,26 +86,26 @@ class MainActivity : AppCompatActivity(), HomeFragment.OnFragmentHomeInteraction
     }
 
     override fun onFragmentHomeInteraction(
-        mgoals_alex: Int,
-        mgoals_alex_temp: Int,
-        mgoals_hendrik: Int,
-        mgoals_hendrik_temp: Int,
+        mgoals_player1: Int,
+        mgoals_player1_temp: Int,
+        mgoals_player2: Int,
+        mgoals_player2_temp: Int,
         mgames_played: Int,
         mgame_time: Long,
         mgoal_progress: String
     ) {
-        goalsAlex = mgoals_alex
-        goalsAlexTemp = mgoals_alex_temp
-        goalsHendrik = mgoals_hendrik
-        goalsHendrikTemp = mgoals_hendrik_temp
+        goalsPlayer1 = mgoals_player1
+        goalsPlayer1Temp = mgoals_player1_temp
+        goalsPlayer2 = mgoals_player2
+        goalsPlayer2Temp = mgoals_player2_temp
         gamesPlayed = mgames_played
         elapsedGameTime = mgame_time
         goalProgress = mgoal_progress
         val editor = prefs.edit()
-        editor.putInt(keyGoalsHendrik, goalsHendrik)
-        editor.putInt(keyGoalsHendrikTemp, goalsHendrikTemp)
-        editor.putInt(keyGoalsAlex, goalsAlex)
-        editor.putInt(keyGoalsAlexTemp, goalsAlexTemp)
+        editor.putInt(keyGoalsPlayer2, goalsPlayer2)
+        editor.putInt(keyGoalsPlayer2Temp, goalsPlayer2Temp)
+        editor.putInt(keyGoalsPlayer1, goalsPlayer1)
+        editor.putInt(keyGoalsPlayer1Temp, goalsPlayer1Temp)
         editor.putInt(keyGamesPlayed, gamesPlayed)
         editor.putLong(keyElapsedGameTime, elapsedGameTime)
         editor.putString(keyGoalProgress, goalProgress)

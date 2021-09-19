@@ -14,8 +14,8 @@ class StatsViewModel(application: Application) : AndroidViewModel(application) {
 
     lateinit var listtotalgoals: ArrayList<PieEntry>
     var totalgames = 0
-    var goalsAlex = 0
-    var goalsHendrik = 0
+    var goalsPlayer1 = 0
+    var goalsPlayer2 = 0
     var gamesPlayed = 0
     var goalProgress = ""
     var goalProgressTemp = ""

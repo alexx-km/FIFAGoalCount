@@ -60,7 +60,7 @@
             app:layout_constraintVertical_bias="0.05" />
 
     <TextView
-            android:id="@+id/number_goals_hendrik"
+            android:id="@+id/number_goals_player2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/goals_zero"
@@ -75,7 +75,7 @@
             app:layout_constraintVertical_bias="0.3" />
 
     <TextView
-            android:id="@+id/number_goals_alex"
+            android:id="@+id/number_goals_player1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/goals_zero"
@@ -121,28 +121,28 @@
             android:id="@+id/text_player_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/name_hendrik"
+            android:text="@string/name_player2"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/divider2"
-            app:layout_constraintEnd_toEndOf="@+id/number_goals_hendrik"
-            app:layout_constraintStart_toStartOf="@+id/number_goals_hendrik"
-            app:layout_constraintTop_toBottomOf="@+id/number_goals_hendrik"
+            app:layout_constraintEnd_toEndOf="@+id/number_goals_player2"
+            app:layout_constraintStart_toStartOf="@+id/number_goals_player2"
+            app:layout_constraintTop_toBottomOf="@+id/number_goals_player2"
             app:layout_constraintVertical_bias="0.05" />
 
     <TextView
             android:id="@+id/text_player_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/name_alex"
+            android:text="@string/name_player1"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/divider2"
-            app:layout_constraintEnd_toEndOf="@+id/number_goals_alex"
-            app:layout_constraintStart_toStartOf="@+id/number_goals_alex"
-            app:layout_constraintTop_toBottomOf="@+id/number_goals_alex"
+            app:layout_constraintEnd_toEndOf="@+id/number_goals_player1"
+            app:layout_constraintStart_toStartOf="@+id/number_goals_player1"
+            app:layout_constraintTop_toBottomOf="@+id/number_goals_player1"
             app:layout_constraintVertical_bias="0.05" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/addGoalHendrik"
+            android:id="@+id/addGoalPlayer2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_baseline_add_24px"
@@ -154,7 +154,7 @@
             app:layout_constraintVertical_bias="0.15" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/delGoalHendrik"
+            android:id="@+id/delGoalPlayer2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_baseline_remove_24px"
@@ -162,11 +162,11 @@
             app:layout_constraintBottom_toTopOf="@id/divider2"
             app:layout_constraintEnd_toEndOf="@id/text_player_2"
             app:layout_constraintStart_toStartOf="@id/text_player_2"
-            app:layout_constraintTop_toBottomOf="@id/addGoalHendrik"
+            app:layout_constraintTop_toBottomOf="@id/addGoalPlayer2"
             app:layout_constraintVertical_bias="0.15" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/addGoalAlex"
+            android:id="@+id/addGoalPlayer1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_baseline_add_24px"
@@ -178,7 +178,7 @@
             app:layout_constraintVertical_bias="0.15" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/delGoalAlex"
+            android:id="@+id/delGoalPlayer1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_baseline_remove_24px"
@@ -186,7 +186,7 @@
             app:layout_constraintBottom_toTopOf="@id/divider2"
             app:layout_constraintEnd_toEndOf="@id/text_player_1"
             app:layout_constraintStart_toStartOf="@id/text_player_1"
-            app:layout_constraintTop_toBottomOf="@id/addGoalAlex"
+            app:layout_constraintTop_toBottomOf="@id/addGoalPlayer1"
             app:layout_constraintVertical_bias="0.15" />
     <!--<Chronometer
             android:layout_width="0dp"
@@ -266,7 +266,7 @@
             app:layout_constraintBottom_toTopOf="@+id/number_games_played"
             app:layout_constraintEnd_toEndOf="@+id/viewKonfetti"
             app:layout_constraintStart_toStartOf="@+id/viewKonfetti"
-            app:layout_constraintTop_toBottomOf="@+id/delGoalHendrik"
+            app:layout_constraintTop_toBottomOf="@+id/delGoalPlayer2"
             app:layout_constraintVertical_bias="0.19999999" />
 
     <View

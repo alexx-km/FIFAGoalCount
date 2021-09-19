@@ -30,8 +30,8 @@ class GoalQuotaFragment : Fragment() {
     var prefs: SharedPreferences? = null
 
     private var goaldatasize = 0
-    private var tempgoalsalex = 0
-    private var tempgoalshendrik = 0
+    private var tempgoalsplayer1 = 0
+    private var tempgoalsplayer2 = 0
     private var lastplaydate = 0F
 
     private var _visiblefirsttime = false
@@ -42,8 +42,8 @@ class GoalQuotaFragment : Fragment() {
     private lateinit var goalDataAdapter: GoalDataAdapter
 
     private lateinit var goalQuotaViewModel: GoalQuotaViewModel
-    private lateinit var listquotaalex: ArrayList<Entry>
-    private lateinit var listquotahendrik: ArrayList<Entry>
+    private lateinit var listquotaplayer1: ArrayList<Entry>
+    private lateinit var listquotaplayer2: ArrayList<Entry>
     private lateinit var listtotalgoals: ArrayList<PieEntry>
 
     private var keyPlayer1 = "key_player_1"
@@ -65,8 +65,8 @@ class GoalQuotaFragment : Fragment() {
 
         quotaChart = root.findViewById(R.id.quota_chart)
         //GoalData
-        listquotahendrik = ArrayList<Entry>()
-        listquotaalex = ArrayList<Entry>()
+        listquotaplayer2 = ArrayList<Entry>()
+        listquotaplayer1 = ArrayList<Entry>()
         listtotalgoals = ArrayList<PieEntry>()
         prepareList()
         displayemptyQuotaChart()
@@ -84,8 +84,8 @@ class GoalQuotaFragment : Fragment() {
     private fun prepareList() {
 
         var df = DecimalFormat("#.##") //df.format()
-        var tempquotaalex = 0F
-        var tempquotahendrik = 0F
+        var tempquotaplayer1 = 0F
+        var tempquotaplayer2 = 0F
 
         var goaldatalist = goalQuotaViewModel.getAllSessionsNonLive()
         goaldatasize = goaldatalist.size
@@ -105,29 +105,29 @@ class GoalQuotaFragment : Fragment() {
                 //get current goal data
                 currentGoalData = goalDataAdapter.getGoalDataAt(goaldatasize - 1)
                 //get goal quota and add to Entry
-                tempquotaalex = currentGoalData.getAlexQuota().toFloat()
-                /*BigDecimal(currentGoalData.getAlexQuota()).setScale(2, RoundingMode.HALF_EVEN)
+                tempquotaplayer1 = currentGoalData.getPlayer1Quota().toFloat()
+                /*BigDecimal(currentGoalData.getPlayer1Quota()).setScale(2, RoundingMode.HALF_EVEN)
                     .toFloat()*/
-                tempquotahendrik = currentGoalData.getHendrikQuota().toFloat()
-                /*BigDecimal(currentGoalData.getHendrikQuota()).setScale(2, RoundingMode.HALF_EVEN)
+                tempquotaplayer2 = currentGoalData.getPlayer2Quota().toFloat()
+                /*BigDecimal(currentGoalData.getPlayer2Quota()).setScale(2, RoundingMode.HALF_EVEN)
                     .toFloat()*/
-                listquotaalex.add(Entry(currentGoalData.playDate.toFloat(), tempquotaalex))
-                listquotahendrik.add(Entry(currentGoalData.playDate.toFloat(), tempquotahendrik))
+                listquotaplayer1.add(Entry(currentGoalData.playDate.toFloat(), tempquotaplayer1))
+                listquotaplayer2.add(Entry(currentGoalData.playDate.toFloat(), tempquotaplayer2))
                 goaldatasize -= 1
             }
         }
     }
 
     private fun displayQuotaChart() {
-        var dataSetQuotaHendrik = LineDataSet(
-            listquotahendrik,
+        var dataSetQuotaPlayer2 = LineDataSet(
+            listquotaplayer2,
             "Quote ${goalQuotaViewModel.player2}"
         )
-        dataSetQuotaHendrik.color = ContextCompat.getColor(requireContext(), R.color.colorPrimary)
-        dataSetQuotaHendrik.lineWidth = 2F
-        var dataSetQuotaAlex = LineDataSet(listquotaalex, "Quote ${goalQuotaViewModel.player1}")
-        dataSetQuotaAlex.color = ContextCompat.getColor(requireContext(), R.color.colorLine2)
-        dataSetQuotaAlex.lineWidth = 2F
+        dataSetQuotaPlayer2.color = ContextCompat.getColor(requireContext(), R.color.colorPrimary)
+        dataSetQuotaPlayer2.lineWidth = 2F
+        var dataSetQuotaPlayer1 = LineDataSet(listquotaplayer1, "Quote ${goalQuotaViewModel.player1}")
+        dataSetQuotaPlayer1.color = ContextCompat.getColor(requireContext(), R.color.colorLine2)
+        dataSetQuotaPlayer1.lineWidth = 2F
 
         var xAxis = quotaChart.xAxis
         xAxis.position = XAxis.XAxisPosition.BOTTOM
@@ -143,8 +143,8 @@ class GoalQuotaFragment : Fragment() {
         yAxis.setDrawGridLines(true)
 
         var dataSetQuota = ArrayList<ILineDataSet>()
-        dataSetQuota.add(dataSetQuotaAlex)
-        dataSetQuota.add(dataSetQuotaHendrik)
+        dataSetQuota.add(dataSetQuotaPlayer1)
+        dataSetQuota.add(dataSetQuotaPlayer2)
 
         var data = LineData(dataSetQuota)
         quotaChart.data = data

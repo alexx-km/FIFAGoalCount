@@ -1,6 +1,5 @@
 package com.porangidev.fifagoalcounter
 
-import android.media.AsyncPlayer
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.PieEntry
 
@@ -27,21 +26,21 @@ class DataHandler {
             var newestGoalData = goalDataAdapter.getGoalDataAt(goaldatasize - 1)
             var lastplaydate = newestGoalData.playDate.toFloat()
 
-            var tempgoalsalex = 0
-            var tempgoalshendrik = 0
+            var tempgoalsplayer1 = 0
+            var tempgoalsplayer2 = 0
 
             while (goaldatasize > 0) {
                 //get current goal data
                 currentGoalData = goalDataAdapter.getGoalDataAt(goaldatasize - 1)
-                tempgoalsalex += currentGoalData.goalsAlex
-                tempgoalshendrik += currentGoalData.goalsHendrik
-                listquotaplayer1.add(Entry(currentGoalData.playDate.toFloat(), currentGoalData.getAlexQuota().toFloat()))
-                listquotaplayer2.add(Entry(currentGoalData.playDate.toFloat(), currentGoalData.getHendrikQuota().toFloat()))
+                tempgoalsplayer1 += currentGoalData.goalsPlayer1
+                tempgoalsplayer2 += currentGoalData.goalsPlayer2
+                listquotaplayer1.add(Entry(currentGoalData.playDate.toFloat(), currentGoalData.getPlayer1Quota().toFloat()))
+                listquotaplayer2.add(Entry(currentGoalData.playDate.toFloat(), currentGoalData.getPlayer2Quota().toFloat()))
                 totalgames += currentGoalData.playedGames
                 goaldatasize -= 1
             }
-            listtotalgoals.add(PieEntry(tempgoalsalex.toFloat(), "Tore ${player1}"))
-            listtotalgoals.add(PieEntry(tempgoalshendrik.toFloat(), "Tore ${player2}"))
+            listtotalgoals.add(PieEntry(tempgoalsplayer1.toFloat(), "Tore ${player1}"))
+            listtotalgoals.add(PieEntry(tempgoalsplayer2.toFloat(), "Tore ${player2}"))
 
             //goals current matchday missing
         }

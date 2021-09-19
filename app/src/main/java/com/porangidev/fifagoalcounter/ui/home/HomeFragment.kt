@@ -36,10 +36,10 @@ class HomeFragment : Fragment(), View.OnClickListener {
     private var listener: OnFragmentHomeInteractionListener? = null
     //Shared Preferences
     private var prefs: SharedPreferences? = null
-    private var keyGoalsHendrik = "KEY_GOALS_HENDRIK_PREFS"
-    private var keyGoalsHendrikTemp = "KEY_GOALS_HENDRIK_TEMP_PREFS"
-    private var keyGoalsAlex = "KEY_GOALS_ALEX_PREFS"
-    private var keyGoalsAlexTemp = "KEY_GOALS_ALEX_TEMP_PREFS"
+    private var keyGoalsPlayer2 = "KEY_GOALS_PLAYER2_PREFS"
+    private var keyGoalsPlayer2Temp = "KEY_GOALS_PLAYER2_TEMP_PREFS"
+    private var keyGoalsPlayer1 = "KEY_GOALS_PLAYER1_PREFS"
+    private var keyGoalsPlayer1Temp = "KEY_GOALS_PLAYER1_TEMP_PREFS"
     private var keyGamesPlayed = "KEY_GAMES_PLAYED_PREFS"
     private var keyElapsedGameTime = "KEY_ELAPSED_GAME_TIME_PREFS"
     private var keyGoalProgress = "KEY_GOAL_PROGRESS_PREFS"
@@ -50,18 +50,18 @@ class HomeFragment : Fragment(), View.OnClickListener {
     private lateinit var divider: View
     private lateinit var divider2: View
     //TextViews
-    private lateinit var numberGoalsAlex: TextView
-    private lateinit var numberGoalsHendrik: TextView
+    private lateinit var numberGoalsPlayer1: TextView
+    private lateinit var numberGoalsPlayer2: TextView
     private lateinit var numberGamesPlayed: TextView
     private lateinit var textGoalProgress: TextView
     private lateinit var date: TextView
     private lateinit var textPlayer1: TextView
     private lateinit var textPlayer2: TextView
     //Buttons
-    private lateinit var addGoalAlex: FloatingActionButton
-    private lateinit var delGoalAlex: FloatingActionButton
-    private lateinit var addGoalHendrik: FloatingActionButton
-    private lateinit var delGoalHendrik: FloatingActionButton
+    private lateinit var addGoalPlayer1: FloatingActionButton
+    private lateinit var delGoalPlayer1: FloatingActionButton
+    private lateinit var addGoalPlayer2: FloatingActionButton
+    private lateinit var delGoalPlayer2: FloatingActionButton
     private lateinit var addGame: FloatingActionButton
     private lateinit var delGame: FloatingActionButton
     private lateinit var resetButton: FloatingActionButton
@@ -95,8 +95,8 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
     private fun init() {
         //TextViews
-        numberGoalsAlex = requireView().findViewById(R.id.number_goals_alex)
-        numberGoalsHendrik = requireView().findViewById(R.id.number_goals_hendrik)
+        numberGoalsPlayer1 = requireView().findViewById(R.id.number_goals_player1)
+        numberGoalsPlayer2 = requireView().findViewById(R.id.number_goals_player2)
         numberGamesPlayed = requireView().findViewById(R.id.number_games_played)
         textGoalProgress = requireView().findViewById(R.id.text_last_goals)
         textPlayer1 = requireView().findViewById(R.id.text_player_1)
@@ -115,28 +115,28 @@ class HomeFragment : Fragment(), View.OnClickListener {
         }
         date = requireView().findViewById(R.id.date)
         //Buttons
-        addGoalAlex = requireView().findViewById(R.id.addGoalAlex)
-        delGoalAlex = requireView().findViewById(R.id.delGoalAlex)
-        addGoalHendrik = requireView().findViewById(R.id.addGoalHendrik)
-        delGoalHendrik = requireView().findViewById(R.id.delGoalHendrik)
+        addGoalPlayer1 = requireView().findViewById(R.id.addGoalPlayer1)
+        delGoalPlayer1 = requireView().findViewById(R.id.delGoalPlayer1)
+        addGoalPlayer2 = requireView().findViewById(R.id.addGoalPlayer2)
+        delGoalPlayer2 = requireView().findViewById(R.id.delGoalPlayer2)
         addGame = requireView().findViewById(R.id.addGame)
         delGame = requireView().findViewById(R.id.delGame)
         resetButton = requireView().findViewById(R.id.resetButton)
         saveButton = requireView().findViewById(R.id.saveButton)
         //Button OnClickListener
-        addGoalAlex.setOnClickListener(this)
-        delGoalAlex.setOnClickListener(this)
-        addGoalHendrik.setOnClickListener(this)
-        delGoalHendrik.setOnClickListener(this)
+        addGoalPlayer1.setOnClickListener(this)
+        delGoalPlayer1.setOnClickListener(this)
+        addGoalPlayer2.setOnClickListener(this)
+        delGoalPlayer2.setOnClickListener(this)
         addGame.setOnClickListener(this)
         delGame.setOnClickListener(this)
         resetButton.setOnClickListener(this)
         saveButton.setOnClickListener(this)
         //Load SharedPreferences in ViewModel
-        homeViewModel.goalsAlex = prefs!!.getInt(keyGoalsAlex, 0)
-        homeViewModel.goalsAlexTemp = prefs!!.getInt(keyGoalsAlexTemp, 0)
-        homeViewModel.goalsHendrik = prefs!!.getInt(keyGoalsHendrik, 0)
-        homeViewModel.goalsHendrikTemp = prefs!!.getInt(keyGoalsHendrikTemp, 0)
+        homeViewModel.goalsPlayer1 = prefs!!.getInt(keyGoalsPlayer1, 0)
+        homeViewModel.goalsPlayer1Temp = prefs!!.getInt(keyGoalsPlayer1Temp, 0)
+        homeViewModel.goalsPlayer2 = prefs!!.getInt(keyGoalsPlayer2, 0)
+        homeViewModel.goalsPlayer2Temp = prefs!!.getInt(keyGoalsPlayer2Temp, 0)
         homeViewModel.gamesPlayed = prefs!!.getInt(keyGamesPlayed, 0)
         homeViewModel.goalProgress = prefs!!.getString(keyGoalProgress, "")!!
         homeViewModel.ellapsedGameTime = prefs!!.getLong(keyElapsedGameTime, 0L)
@@ -145,11 +145,11 @@ class HomeFragment : Fragment(), View.OnClickListener {
         gameDate = prefs!!.getLong(keyGameDate, 0L)
         //Show Text from SharedPreferences
         if (showSpoiler) {
-            numberGoalsAlex.text = homeViewModel.goalsAlex.toString()
-            numberGoalsHendrik.text = homeViewModel.goalsHendrik.toString()
+            numberGoalsPlayer1.text = homeViewModel.goalsPlayer1.toString()
+            numberGoalsPlayer2.text = homeViewModel.goalsPlayer2.toString()
         } else {
-            numberGoalsAlex.text = homeViewModel.goalsAlexTemp.toString()
-            numberGoalsHendrik.text = homeViewModel.goalsHendrikTemp.toString()
+            numberGoalsPlayer1.text = homeViewModel.goalsPlayer1Temp.toString()
+            numberGoalsPlayer2.text = homeViewModel.goalsPlayer2Temp.toString()
         }
         numberGamesPlayed.text = homeViewModel.gamesPlayed.toString()
         textGoalProgress.text = homeViewModel.goalProgress
@@ -169,16 +169,16 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when (v) {
-            addGoalAlex -> {
+            addGoalPlayer1 -> {
                 handleClick(0)
             }
-            delGoalAlex -> {
+            delGoalPlayer1 -> {
                 handleClick(1)
             }
-            addGoalHendrik -> {
+            addGoalPlayer2 -> {
                 handleClick(2)
             }
-            delGoalHendrik -> {
+            delGoalPlayer2 -> {
                 handleClick(3)
             }
             addGame -> {
@@ -218,8 +218,8 @@ class HomeFragment : Fragment(), View.OnClickListener {
         val dataViewModel = ViewModelProviders.of(this).get(DataViewModel::class.java)
         val goalData = GoalData(
             null,
-            homeViewModel.goalsAlex,
-            homeViewModel.goalsHendrik,
+            homeViewModel.goalsPlayer1,
+            homeViewModel.goalsPlayer2,
             homeViewModel.gamesPlayed,
             homeViewModel.goalProgress,
             gameDate,
@@ -233,34 +233,34 @@ class HomeFragment : Fragment(), View.OnClickListener {
         //if Spoiler enabled, show total goals
         TransitionManager.beginDelayedTransition(home_view, AutoTransition().setDuration(1500L))
         /*val anim = AnimationUtils.loadAnimation(context, R.anim.slide_up)
-        numberGoalsAlex.startAnimation(anim)
-        numberGoalsHendrik.startAnimation(anim)*/
+        numberGoalsPlayer1.startAnimation(anim)
+        numberGoalsPlayer2.startAnimation(anim)*/
         if (showSpoiler) {
-            numberGoalsAlex.text = homeViewModel.goalsAlex.toString()
-            numberGoalsHendrik.text = homeViewModel.goalsHendrik.toString()
+            numberGoalsPlayer1.text = homeViewModel.goalsPlayer1.toString()
+            numberGoalsPlayer2.text = homeViewModel.goalsPlayer2.toString()
         } else {
-            numberGoalsAlex.text = homeViewModel.goalsAlexTemp.toString()
-            numberGoalsHendrik.text = homeViewModel.goalsHendrikTemp.toString()
+            numberGoalsPlayer1.text = homeViewModel.goalsPlayer1Temp.toString()
+            numberGoalsPlayer2.text = homeViewModel.goalsPlayer2Temp.toString()
         }
         numberGamesPlayed.text = homeViewModel.gamesPlayed.toString()
 
         textGoalProgress.text = homeViewModel.goalProgress
 
         val editor = prefs!!.edit()
-        editor.putInt(keyGoalsHendrik, homeViewModel.goalsHendrik)
-        editor.putInt(keyGoalsHendrikTemp, homeViewModel.goalsHendrikTemp)
-        editor.putInt(keyGoalsAlex, homeViewModel.goalsAlex)
-        editor.putInt(keyGoalsAlexTemp, homeViewModel.goalsAlexTemp)
+        editor.putInt(keyGoalsPlayer2, homeViewModel.goalsPlayer2)
+        editor.putInt(keyGoalsPlayer2Temp, homeViewModel.goalsPlayer2Temp)
+        editor.putInt(keyGoalsPlayer1, homeViewModel.goalsPlayer1)
+        editor.putInt(keyGoalsPlayer1Temp, homeViewModel.goalsPlayer1Temp)
         editor.putInt(keyGamesPlayed, homeViewModel.gamesPlayed)
         editor.putLong(keyElapsedGameTime, homeViewModel.ellapsedGameTime)
         editor.putLong(keyGameDate, gameDate)
         editor.putString(keyGoalProgress, homeViewModel.goalProgress)
         editor.apply()
         listener?.onFragmentHomeInteraction(
-            homeViewModel.goalsAlex,
-            homeViewModel.goalsAlexTemp,
-            homeViewModel.goalsHendrik,
-            homeViewModel.goalsHendrikTemp,
+            homeViewModel.goalsPlayer1,
+            homeViewModel.goalsPlayer1Temp,
+            homeViewModel.goalsPlayer2,
+            homeViewModel.goalsPlayer2Temp,
             homeViewModel.gamesPlayed,
             homeViewModel.ellapsedGameTime,
             homeViewModel.goalProgress
@@ -269,31 +269,31 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
     private fun handleClick(case: Int) {
         if (case == 0) {
-            homeViewModel.goalsAlex++; homeViewModel.goalsAlexTemp++; homeViewModel.goalProgress += "a"; konfettiMe(
+            homeViewModel.goalsPlayer1++; homeViewModel.goalsPlayer1Temp++; homeViewModel.goalProgress += "a"; konfettiMe(
                 Color.RED,
                 Color.BLACK
             )
         }
-        if (case == 1 && ((showSpoiler && homeViewModel.goalsAlex > 0) || (!showSpoiler && homeViewModel.goalsAlexTemp > 0))) {
-            homeViewModel.goalsAlex--; if (homeViewModel.goalsAlexTemp > 0) homeViewModel.goalsAlexTemp--; homeViewModel.goalProgress =
+        if (case == 1 && ((showSpoiler && homeViewModel.goalsPlayer1 > 0) || (!showSpoiler && homeViewModel.goalsPlayer1Temp > 0))) {
+            homeViewModel.goalsPlayer1--; if (homeViewModel.goalsPlayer1Temp > 0) homeViewModel.goalsPlayer1Temp--; homeViewModel.goalProgress =
                 deleteLetter(homeViewModel.goalProgress, "a")
         }
         if (case == 2) {
-            homeViewModel.goalsHendrik++; homeViewModel.goalsHendrikTemp++; homeViewModel.goalProgress += "h"; konfettiMe(
+            homeViewModel.goalsPlayer2++; homeViewModel.goalsPlayer2Temp++; homeViewModel.goalProgress += "h"; konfettiMe(
                 Color.BLUE,
                 Color.WHITE
             )
         }
-        if (case == 3 && ((showSpoiler && homeViewModel.goalsHendrik > 0) || (!showSpoiler && homeViewModel.goalsHendrikTemp > 0))) {
-            homeViewModel.goalsHendrik--; if (homeViewModel.goalsHendrikTemp > 0) homeViewModel.goalsHendrikTemp--; homeViewModel.goalProgress =
+        if (case == 3 && ((showSpoiler && homeViewModel.goalsPlayer2 > 0) || (!showSpoiler && homeViewModel.goalsPlayer2Temp > 0))) {
+            homeViewModel.goalsPlayer2--; if (homeViewModel.goalsPlayer2Temp > 0) homeViewModel.goalsPlayer2Temp--; homeViewModel.goalProgress =
                 deleteLetter(homeViewModel.goalProgress, "h")
         }
         if (case == 4) {
             if (homeViewModel.gamesPlayed < 1) {
                 gameDate = Calendar.getInstance().timeInMillis
             }
-            homeViewModel.gamesPlayed++; homeViewModel.goalsHendrikTemp =
-                0; homeViewModel.goalsAlexTemp = 0; gameTime.base =
+            homeViewModel.gamesPlayed++; homeViewModel.goalsPlayer2Temp =
+                0; homeViewModel.goalsPlayer1Temp = 0; gameTime.base =
                 SystemClock.elapsedRealtime(); gameTime.start(); homeViewModel.ellapsedGameTime =
                 gameTime.base
         }
@@ -319,10 +319,10 @@ class HomeFragment : Fragment(), View.OnClickListener {
     }
 
     private fun resetMe() {
-        homeViewModel.goalsHendrik = 0
-        homeViewModel.goalsHendrikTemp = 0
-        homeViewModel.goalsAlex = 0
-        homeViewModel.goalsAlexTemp = 0
+        homeViewModel.goalsPlayer2 = 0
+        homeViewModel.goalsPlayer2Temp = 0
+        homeViewModel.goalsPlayer1 = 0
+        homeViewModel.goalsPlayer1Temp = 0
         homeViewModel.gamesPlayed = 0
         homeViewModel.ellapsedGameTime = 0L
         homeViewModel.goalProgress = ""
@@ -347,10 +347,10 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
     interface OnFragmentHomeInteractionListener {
         fun onFragmentHomeInteraction(
-            mgoals_alex: Int,
-            mgoals_alex_temp: Int,
-            mgoals_hendrik: Int,
-            mgoals_hendrik_temp: Int,
+            mgoals_player1: Int,
+            mgoals_player1_temp: Int,
+            mgoals_player2: Int,
+            mgoals_player2_temp: Int,
             mgames_played: Int,
             mgame_time: Long,
             mgoal_progress: String
