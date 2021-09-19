@@ -69,16 +69,8 @@ class GoalQuotaFragment : Fragment() {
         listquotaplayer1 = ArrayList<Entry>()
         listtotalgoals = ArrayList<PieEntry>()
         prepareList()
-        displayemptyQuotaChart()
+        displayQuotaChart()
         return root
-    }
-
-    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-        //super.setUserVisibleHint(isVisibleToUser)
-        if (isVisibleToUser && !_visiblefirsttime) {
-            _visiblefirsttime = true
-            displayQuotaChart()
-        }
     }
 
     private fun prepareList() {
@@ -159,32 +151,4 @@ class GoalQuotaFragment : Fragment() {
         quotaChart.setVisibleXRangeMaximum(5000000000F)*/
 
     }
-
-    private fun displayemptyQuotaChart() {
-        var tempemptygoals = ArrayList<Entry>()
-        tempemptygoals.add(Entry(0F, 0F))
-        var dataSetEmpty = LineDataSet(tempemptygoals, "")
-        dataSetEmpty.color = Color.TRANSPARENT
-        var xAxis = quotaChart.xAxis
-        xAxis.position = XAxis.XAxisPosition.BOTTOM
-        xAxis.setDrawGridLines(false)
-        xAxis.setDrawLabels(false)
-        var yAxisRight = quotaChart.axisRight
-        yAxisRight.isEnabled = false
-        yAxisRight.setDrawGridLines(false)
-        var yAxis = quotaChart.axisLeft
-        yAxis.axisMaximum = (3.0).toFloat()
-        yAxis.axisMinimum = (0.0).toFloat()
-        yAxis.granularity = 1F
-        var dataSet = ArrayList<ILineDataSet>()
-        dataSet.add(dataSetEmpty)
-        var data = LineData(dataSet)
-        quotaChart.setPinchZoom(false)
-        quotaChart.isDragEnabled = false
-        quotaChart.data = data
-        quotaChart.description.isEnabled = false
-        quotaChart.legend.isEnabled = false
-    }
-
-
 }
