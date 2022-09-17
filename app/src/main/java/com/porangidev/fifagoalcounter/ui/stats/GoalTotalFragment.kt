@@ -89,6 +89,7 @@ class GoalTotalFragment : Fragment() {
         return root
     }
 
+    @Deprecated("Deprecated in Java")
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         //super.setUserVisibleHint(isVisibleToUser)
         if (isVisibleToUser && !_visiblefirsttime) {

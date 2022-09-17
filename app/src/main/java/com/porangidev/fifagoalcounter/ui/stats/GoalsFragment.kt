@@ -80,6 +80,7 @@ class GoalsFragment : Fragment(), OnItemSelectedListener {
         _viewcreated = true
     }
 
+    @Deprecated("Deprecated in Java")
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
         if (isVisibleToUser && !_visiblefirsttime && _viewcreated) {

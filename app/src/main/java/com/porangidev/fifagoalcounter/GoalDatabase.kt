@@ -46,6 +46,7 @@ abstract class GoalDatabase: RoomDatabase() {
 
             // private var goalDao: GoalDao = db.goalDao()
 
+            @Deprecated("Deprecated in Java")
             override fun doInBackground(vararg voids: Void): Void? {
                 // place for manual test entries
                 //goalDao.insert(GoalData(1, 12, 7, 9, "hhhhaaaa", 397510577L, "FIFA 21"))

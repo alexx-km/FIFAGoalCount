@@ -45,6 +45,7 @@ class GoalRepository(private var goalDao: GoalDao) {
 
     private class InsertGoalDataAsyncTask(private val mGoalDao: GoalDao) : AsyncTask<GoalData, Void, Void>() {
 
+        @Deprecated("Deprecated in Java")
         override fun doInBackground(vararg params: GoalData): Void? {
             mGoalDao.insert(params[0])
             return null
@@ -52,6 +53,7 @@ class GoalRepository(private var goalDao: GoalDao) {
     }
     private class UpdateGoalDataAsyncTask(private val mGoalDao: GoalDao) : AsyncTask<GoalData, Void, Void>() {
 
+        @Deprecated("Deprecated in Java")
         override fun doInBackground(vararg params: GoalData): Void? {
             mGoalDao.update(params[0])
             return null
@@ -59,6 +61,7 @@ class GoalRepository(private var goalDao: GoalDao) {
     }
     private class DeleteGoalDataAsyncTask(private val mGoalDao: GoalDao) : AsyncTask<GoalData, Void, Void>() {
 
+        @Deprecated("Deprecated in Java")
         override fun doInBackground(vararg params: GoalData): Void? {
             mGoalDao.delete(params[0])
             return null
@@ -66,6 +69,7 @@ class GoalRepository(private var goalDao: GoalDao) {
     }
     private class DeleteAllEntriesAsyncTask(private val mGoalDao: GoalDao) : AsyncTask<Void, Void, Void>() {
 
+        @Deprecated("Deprecated in Java")
         override fun doInBackground(vararg params: Void): Void? {
             mGoalDao.deleteAllEntries()
             return null
